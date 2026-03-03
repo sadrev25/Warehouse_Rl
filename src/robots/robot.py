@@ -17,7 +17,6 @@ if TYPE_CHECKING:
     from robots.robot_swarm import RobotSwarm
 
 from helper_functions import l2_norm
-
 from robots.robot_modules.state_handler import RobotState
 
 
@@ -52,35 +51,32 @@ class Robot(object, metaclass=abc.ABCMeta):
         self.current_target = None
 
     @abc.abstractmethod
-    def update_swarm_state(self, robot_swarm: RobotSwarm, **kwargs) -> dict:
+    def update_path_planning(self, swarm_info: dict, **kwargs) -> None:
         """
-        Update the state of the robot swarm via communication.
-        """
-        raise NotImplementedError()
-
-    @abc.abstractmethod
-    def update_path_info(self, swarm_info: dict, **kwargs) -> None:
-        """
-        Compute the target position of the robot while considering the swarm's currently known state.
+        Compute the path of the robot while considering the swarm's currently known state.
         """
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def update_target_position(self, **kwargs) -> None:
+    def update_position(self, **kwargs) -> None:
         """
         Update the position by moving the robot.
         """
         raise NotImplementedError()
 
     @abc.abstractmethod
+    def get_last_recorded_state(self) -> RobotState:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
     def set_deployment_area(self, area: object) -> None:
         raise NotImplementedError()
 
-    def start(self) -> None:
+    def start(self, robot_swarm: RobotSwarm) -> None:
         """Start the robot modules."""
-        self.move_handler.start()
         self.state_handler.start()
-        self.swarm_communication_handler.start()
+        self.move_handler.start()
+        self.swarm_communication_handler.start(self, robot_swarm)
         return
 
     def stop(self) -> None:
@@ -112,6 +108,9 @@ class Robot(object, metaclass=abc.ABCMeta):
 
     def _get_current_position(self) -> np.ndarray:
         return self.state_handler.get_current_position()
+
+    def _get_current_velocity(self) -> np.ndarray:
+        return self.state_handler.get_current_velocity()
 
     def get_vel_history(self) -> list:
         return self.move_handler.velocity_history

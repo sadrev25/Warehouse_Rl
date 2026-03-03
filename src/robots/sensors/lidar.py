@@ -26,7 +26,6 @@ class Lidar:
         self.max_vel = max_vel
 
         self.target_cost_modifier = 1.2  # 3 * max_vel
-        self.collision_modifier = 4 * np.pi
 
     def start(self, simulated_robots: list[RobotSimulation]):
         self.simulated_robots = simulated_robots
@@ -55,8 +54,8 @@ class Lidar:
         motion_change_modifier = 2 * l2_norm(
             velocity
         )  # larger cost of changing the motion if larger velocity
-        # for the maximum velocity of 0.4, the radial change in motion needs to be 1.5 times the radial deviation from the target direction in order to yield a collision cost equal to the target cost
-        # e.g., a motion change of (1.5*np.pi) / 8 has the same cost as a deviation of np.pi / 8 from the target
+        # for the maximum velocity of 0.4 (in one direction), the radial change in motion needs to be 1.5 times the radial deviation from the target direction in order to yield a motion change cost equal to the target cost
+        # e.g., a motion change of (1.5*np.pi) / 8 times a motion change cost of 2 * l2_norm([0.4,0]) has the same total cost as a deviation of np.pi / 8 from the target times the target cost 1.2
 
         collision_cost_per_sector = self.collision_cost_per_sector(
             rcp,
@@ -65,6 +64,8 @@ class Lidar:
             object_geometries_in_range=object_geometries_in_range,
             sector_size=self.sector_size,
         )
+        # collision cost reduced if robot not at max speed
+        self.collision_modifier = 4 * np.pi * l2_norm(velocity) / self.max_vel
 
         total_cost = (
             target_cost_per_sector * self.target_cost_modifier

@@ -42,7 +42,7 @@ def draw_warehouse(ax, warehouse: Warehouse):
         if data.get("description") == "delivery":
             draw_env_item(ax, data, color="darkgreen")
         if data.get("description") == "charging station":
-            draw_env_item(ax, data, color="palevioletred", edgecolor="palevioletred")
+            draw_env_item(ax, data, color="palevioletred", edgecolor="gray", zorder=1)
         if data.get("description") == "wall":
             draw_env_item(ax, data, color="silver", edgecolor="dimgray", zorder=0)
 
@@ -79,13 +79,5 @@ def draw_waypoint(ax, n, data, color):
         zorder=2,
     )
     ax.add_patch(circle)
-    # ax.text(
-    #     data.get("x"),
-    #     data.get("y"),
-    #     n,
-    #     ha="center",
-    #     va="center",
-    #     fontsize=3,
-    #     zorder=10,
-    # )
+
     return

@@ -4,7 +4,7 @@ import networkx as nx
 import numpy as np
 from helper_functions import l2_norm
 from shapely import LineString
-from warehouse_env.shelf import Shelf, Station
+from warehouse_env.station import Station
 from warehouse_env.task import Task
 
 
@@ -24,6 +24,7 @@ class Warehouse:
             self.graph.edges[n1, n2]["geometry"] = LineString(
                 [self.get_coords(n1), self.get_coords(n2)]
             )
+
         self.initialize_stations()
         self.initialize_walls()
         self.min_task_priority = min_task_prio
@@ -54,6 +55,12 @@ class Warehouse:
             target_station,  # type: ignore
         )
         return task
+
+    def update_distances(self) -> None:
+        for n1, n2 in self.graph.edges:
+            self.graph.edges[n1, n2]["eucl_dist"] = l2_norm(
+                self.get_coords(n1) - self.get_coords(n2)
+            )
 
     def initialize_env_types_with_nodes(self) -> None:
 
@@ -90,14 +97,26 @@ class Warehouse:
         return
 
     def initialize_stations(self) -> None:
-        for node_id in self.shelves:
-            shelf = Shelf(self.graph.nodes(data=True)[node_id])
-            shelf.compute_access_points(self.graph.edges(data=True))
+        for node_id in self.shelves + self.charging_stations:
+            shelf = Station(node_id, self.graph.nodes(data=True)[node_id])
+            shelf.compute_access_points(
+                self.graph.edges(data=True), max_dist_center_to_lane=1.45
+            )
             self.graph.nodes[node_id]["object"] = shelf
+
         for node_id in self.machines + self.delivery_stations:
-            station = Station(self.graph.nodes(data=True)[node_id])
-            station.compute_access_points(self.graph.edges(data=True))
+            station = Station(node_id, self.graph.nodes(data=True)[node_id])
+            station.compute_access_points(
+                self.graph.edges(data=True), max_dist_center_to_lane=1.9
+            )
             self.graph.nodes[node_id]["object"] = station
+
+        self.stations = (
+            self.shelves
+            + self.machines
+            + self.delivery_stations
+            + self.charging_stations
+        )
         return
 
     def initialize_walls(self) -> None:
@@ -129,22 +148,8 @@ class Warehouse:
         return np.array([data["x"], data["y"]])
 
     def get_node_from_pos(self, position: np.ndarray, max_dist: float = 0.1) -> str:
-        for node_id in self.graph.nodes:
+        for node_id in self.stations + self.waypoints:
             if l2_norm(position - self.get_coords(node_id)) < max_dist:
                 return node_id
         max_dist += 0.1
         return self.get_node_from_pos(position, max_dist)
-
-    def get_waypoints_from_pos(
-        self, position: np.ndarray, max_dist: float = 0.1
-    ) -> list[str]:
-        for node_id in self.waypoints:
-            if l2_norm(position - self.get_coords(node_id)) < max_dist:
-                return [node_id]
-        for node_id in self.shelves:
-            if l2_norm(position - self.get_coords(node_id)) < max_dist:
-                shelf: Shelf = self.graph.nodes(data=True)[node_id]["object"]
-                access_points = [n2 for _, n2 in shelf.accessible_edges]
-                return access_points
-        max_dist += 0.1
-        return self.get_waypoints_from_pos(position, max_dist=max_dist)

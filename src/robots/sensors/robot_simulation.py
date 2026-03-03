@@ -6,10 +6,8 @@ import threading
 from multiprocessing import Array, Value
 from typing import TYPE_CHECKING
 
-import lcm
 import numpy as np
 from helper_functions import l2_norm
-from lcm_types.itmessage import vector_t
 from scipy.integrate import solve_ivp
 from warehouse_env.warehouse import Warehouse
 
@@ -24,17 +22,9 @@ class RobotSimulation(metaclass=abc.ABCMeta):
             ts_control (float): A new target velocity is set every ts_control seconds.
         """
         self.id = id
-        self.use_lcm = use_lcm
+        self.use_lcm = False
         self.ts_control = ts_control
-        self.wheel_is_lagging = False
 
-        if self.use_lcm:
-            self.lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=0")
-            self.seq_number_u = 0
-            lcs = self.lc.subscribe(f"/robot{self.id}/u", self._lcm_handler)
-            lcs.set_queue_capacity(1)
-
-            self.listen_thread = threading.Thread(target=self._listen, daemon=True)
         return
 
     def trigger_movement(self, vel: np.ndarray) -> None:
@@ -57,43 +47,10 @@ class RobotSimulation(metaclass=abc.ABCMeta):
     def _simulate_movement(self, vel: np.ndarray) -> None:
         raise NotImplementedError()
 
-    def _listen(self) -> None:
-        while self.is_listening:
-            self.lc.handle_timeout(int(3 * self.ts_control * 1000))
-        print("simulation: stop listening")
-
-    def _lcm_handler(self, _: str, msg: bytes) -> None:
-        """Executes the last velocity instruction that has been received via LCM.
-
-        Args:
-            msg (vector_t): Message containing the target velocity.
-        """
-        assert type(msg) == vector_t
-        msg = vector_t.decode(msg)
-        # 3 dim: 1st x, 2nd y, 3rd rotation
-        # print('Received message on channel "%s"' % channel)
-        # print("   value = %s" % str(msg.value))
-        # print("")
-        if msg.seq_number > self.seq_number_u:
-            self.seq_number_u = msg.seq_number
-            vel = np.array(msg.value)[:2]
-            self._simulate_movement(vel)
-        return
-
     def start(self):
-
-        if self.use_lcm and not self.listen_thread.is_alive():
-            print("robot simulation start listening")
-            self.is_listening = True
-            self.listen_thread.start()
         return
 
     def stop(self):
-        if self.use_lcm and self.listen_thread.is_alive():
-            self.is_listening = False
-            # self.listen_thread.join()
-            # create a new thread for the next simulation
-            self.listen_thread = threading.Thread(target=self._listen, daemon=True)
         return
 
     @abc.abstractmethod
@@ -215,8 +172,6 @@ class Hera(RobotSimulation):
                     * (v_des_x_r + v_des_y_r - self.kinematic_radius * phi_r_dot_des),
                 ]
             )
-            if self.wheel_is_lagging:
-                omega_wheel_des[self.lagging_wheel] *= self.wheel_lag
 
             # Fehler zu tatsächlicher Radbewegung, x(3): phi_1
             error_cur = omega_wheel_des - np.array(

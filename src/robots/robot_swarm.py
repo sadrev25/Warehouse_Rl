@@ -206,7 +206,7 @@ class RobotSwarm(object, metaclass=abc.ABCMeta):
             for sm in self.external_state_monitors:
                 sm.start(deployment_area, self.n_robots)
         for robot in self.swarm_robots:
-            robot.start()
+            robot.start(self)
 
         return
 
@@ -255,13 +255,14 @@ class WarehouseSwarm(RobotSwarm):
     def run_swarm_task(  # pyright: ignore[reportIncompatibleMethodOverride]
         self,
         max_tasks: int,
+        seed: int,
         **kwargs,
     ) -> None:
         """
         Args:
             max_steps (int, optional): Maximum number of steps that will be performed.
         """
-
+        np.random.seed(seed)
         robot_mgr = Manager()
         available_robots = robot_mgr.Queue()
         stop_event = robot_mgr.Event()
@@ -270,14 +271,13 @@ class WarehouseSwarm(RobotSwarm):
 
         tasks = [self.request_task(task_number) for task_number in range(max_tasks)]
         started_tasks = []
-        self.start_time = time.time()
 
         for task in tasks:
             robot_id = available_robots.get()
 
             task_proc = Process(
                 target=self.assign_task_to_robot,
-                args=(robot_id, task, available_robots, stop_event),
+                args=(robot_id, task, available_robots, stop_event, seed),
             )
             task_proc.start()
             started_tasks.append(task_proc)
@@ -292,7 +292,7 @@ class WarehouseSwarm(RobotSwarm):
 
         robot_id = available_robots.get()  # wait until the next robot finishes
         stop_event.set()
-        self.run_duration = np.round(time.time() - self.start_time, decimals=1)
+        self.run_duration = np.round(time.time() - self.start_time, decimals=2)
 
         for task_proc in started_tasks:
             task_proc.join()
@@ -316,15 +316,19 @@ class WarehouseSwarm(RobotSwarm):
         task: Task,
         robot_queue: Queue,
         stop_event: Event,
+        seed: int,
     ) -> None:
         # print(f"Task {task.task_number} assigned to robot {robot_id}")
         robot = self.swarm_robots[robot_id]
         time.sleep(0.05)
-        robot_id = robot.execute_warehouse_task(task, self, stop_event)
+        print(
+            f"robot {robot_id} starts task at {np.round(time.time() - self.start_time, decimals=2)}"
+        )
+        robot_id = robot.execute_warehouse_task(task, self, stop_event, seed)
         if not stop_event.is_set():
             self.finished_tasks_info.append(
                 {
-                    "ts": np.round(time.time() - self.start_time, decimals=1),
+                    "ts": np.round(time.time() - self.start_time, decimals=2),
                     "id": robot_id,
                     "task": task.__dict__,
                 }
@@ -340,6 +344,7 @@ class WarehouseSwarm(RobotSwarm):
         external_state_monitors: List[PositionMonitor] | None = None,
         **kwargs,
     ) -> None:
+        self.start_time = time.time()
         super().start_run(deployment_area, external_state_monitors, **kwargs)
         for robot in self.swarm_robots:
             if external_state_monitors is not None:

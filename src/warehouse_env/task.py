@@ -12,5 +12,5 @@ class Task:
         self.task_number = task_number
         self.task_type = task_type
         self.priority = priority
-        self.current_station = current_station
-        self.target_station = target_station
+        self.fetch_item_station = current_station
+        self.drop_item_station = target_station

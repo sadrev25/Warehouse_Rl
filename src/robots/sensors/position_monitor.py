@@ -7,9 +7,7 @@ import time
 from multiprocessing import Array, Manager, Value
 from typing import TYPE_CHECKING
 
-import lcm
 import numpy as np
-from lcm_types.itmessage import vector_t
 
 if TYPE_CHECKING:
     from robots.sensors.robot_simulation import RobotSimulation
@@ -56,7 +54,7 @@ class PositionMonitor(metaclass=abc.ABCMeta):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    def get_current_velocity(self) -> float | None:
+    def get_current_velocity(self) -> np.ndarray | None:
         raise NotImplementedError()
 
     def get_recorded_positions(self) -> list[np.ndarray]:
@@ -137,65 +135,8 @@ class SimulatedPositionSensor(PositionMonitor):
             position = np.array(self.position)
         return position
 
-    def get_current_velocity(self) -> np.ndarray:
+    def get_current_velocity(self) -> np.ndarray | None:
         """Get the current velocity of the robot."""
         with self.velocity.get_lock():
             velocity = np.array(self.velocity)
         return velocity
-
-
-class SimulatedOptitrack(PositionMonitor):
-    """Simulates the behaviour of an optitrack (camera) system that monitors the robot
-    positions and communicates them via LCM."""
-
-    def __init__(
-        self,
-        robot_id: int,
-        simulated_robot: RobotSimulation,
-        ts_control: float = 0.2,
-        **kwargs,
-    ) -> None:
-        super().__init__(robot_id, simulated_robot, ts_control)
-
-        # Uses sequential message numbers to order messages received via UDP.
-        self.seq_number_pos = 0
-        self.lc = lcm.LCM("udpm://239.255.76.67:7667?ttl=0")
-        return
-
-    def _monitor_state(self) -> None:
-        """Get the robot state from the simulated robot and send it via LCM to the state monitor."""
-        while True:
-            position_info = self.simulated_robot.get_robot_state()[-2:]
-            velocity_info = self.simulated_robot.get_current_velocity()
-            with self._state_lock:
-                time_stamp = np.round(time.time() - self.start_time, decimals=1)
-                self.time_stamps.append(time_stamp)
-                self.recorded_positions.append(position_info)
-                self.position[:] = position_info
-                self.velocity[:] = velocity_info
-            self._send_position(position_info)
-            # TODO: send velocity and load
-            time.sleep(self.pause_between_monitoring)
-
-    def _send_position(self, position: np.ndarray) -> None:
-        """Sends a LCM message containing the id of the monitored robot and its current state."""
-        msg_content = np.zeros(shape=(6,))
-        msg_content[:2] = position
-        self.seq_number_pos += 1
-
-        state_msg = vector_t()
-        state_msg.length = 6
-        state_msg.id_sender = self.monitored_robot_id
-        state_msg.seq_number = self.seq_number_pos
-        state_msg.value = list(msg_content)
-        # print(state_msg.value)
-        self.lc.publish(f"/robot{self.monitored_robot_id}/euler", state_msg.encode())
-        return
-
-    def get_current_position(self) -> None:
-        """This is not necessary when the classes are used correctly, since the position is sent via LCM."""
-        return None
-
-    def get_current_velocity(self) -> None:
-        """This is not necessary when the classes are used correctly, since the velocity is sent via LCM."""
-        return None

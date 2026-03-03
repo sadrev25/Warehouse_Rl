@@ -4,16 +4,13 @@ from typing import TYPE_CHECKING, Callable, List
 
 import numpy as np
 from robots.deployment_robot import WarehouseRobot
-from robots.robot_modules.move_handler import LCM_MoveHandler, SimulationMoveHandler
-from robots.robot_modules.state_handler import BasicStateHandler, LCM_StateHandler
-from robots.robot_modules.swarm_communication_handler import (
-    BasicCommunicationHandler,
-    LCM_CommunicationHandler,
-)
+from robots.robot_modules.move_handler import SimulationMoveHandler
+from robots.robot_modules.state_handler import BasicStateHandler
+from robots.robot_modules.swarm_communication_handler import BasicCommunicationHandler
 from robots.robot_swarm import RobotSwarm
 from robots.sensors.lidar import Lidar
 from robots.sensors.load_sensor import LoadSensor
-from robots.sensors.position_monitor import SimulatedOptitrack, SimulatedPositionSensor
+from robots.sensors.position_monitor import SimulatedPositionSensor
 
 if TYPE_CHECKING:
     from robots.robot import Robot
@@ -113,9 +110,7 @@ def build_simulation_robot(
         max_vel=max_vel,
     )
     state_handler = BasicStateHandler(position_sensor, ts_control)
-    swarm_communication_handler = BasicCommunicationHandler(
-        robot_id, ts_communicate, position_sensor
-    )
+    swarm_communication_handler = BasicCommunicationHandler(robot_id, ts_communicate)
     move_handler = SimulationMoveHandler(robot_simulation, ts_control)
 
     robot = rtype(
@@ -133,77 +128,3 @@ def build_simulation_robot(
         **kwargs,
     )
     return robot, position_sensor
-
-
-def build_lcm_simulation_robot(
-    rtype: Callable,
-    simulation_type: Callable[..., RobotSimulation],
-    robot_id: int,
-    color: str,
-    ts_communicate: float,
-    ts_control: float,
-    max_vel: float,
-    **kwargs,
-):
-    robot_simulation = simulation_type(robot_id, use_lcm=True, ts_control=ts_control)
-    position_sensor = SimulatedOptitrack(robot_id, robot_simulation)
-    load_sensor = LoadSensor(robot_simulation)
-    lidar_sensor = Lidar(
-        lidar_range=max_vel * 5,
-        sector_size_in_deg=5,
-        ts_control=ts_control,
-        max_vel=max_vel,
-    )
-    state_handler = LCM_StateHandler(communication_id=robot_id, ts_control=ts_control)
-    swarm_communication_handler = LCM_CommunicationHandler(robot_id, ts_communicate)
-    move_handler = LCM_MoveHandler(communication_id=robot_id, ts_control=ts_control)
-
-    robot = rtype(
-        robot_id=robot_id,
-        color=color,
-        state_handler=state_handler,
-        move_handler=move_handler,
-        swarm_communication_handler=swarm_communication_handler,
-        load_sensor=load_sensor,
-        lidar_sensor=lidar_sensor,
-        ts_communicate=ts_communicate,
-        ts_control=ts_control,
-        max_vel=max_vel,
-        wait_for_ts_communicate=True,
-        **kwargs,
-    )
-    return robot, position_sensor
-
-
-def build_lcm_robot(
-    rtype: Callable,
-    robot_id: int,
-    color: str,
-    ts_communicate: float,
-    ts_control: float,
-    communication_ids,
-    **kwargs,
-):
-    state_handler = LCM_StateHandler(
-        communication_id=communication_ids[robot_id], ts_control=ts_control, ttl=1
-    )
-    swarm_communication_handler = LCM_CommunicationHandler(
-        robot_id, ts_communicate, ttl=1
-    )
-    move_handler = LCM_MoveHandler(
-        communication_id=communication_ids[robot_id], ts_control=ts_control, ttl=1
-    )
-
-    robot = rtype(
-        robot_id=robot_id,
-        color=color,
-        state_handler=state_handler,
-        swarm_communication_handler=swarm_communication_handler,
-        load_sensor=None,
-        move_handler=move_handler,
-        ts_communicate=ts_communicate,
-        ts_control=ts_control,
-        wait_for_ts_communicate=True,
-        **kwargs,
-    )
-    return robot, None

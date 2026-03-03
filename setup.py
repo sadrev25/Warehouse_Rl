@@ -30,7 +30,5 @@ setup(
     url="",
     description="",
     long_description="",
-    packages=[
-        "Warehouse_RL",
-    ],
+    packages=["src"],
 )

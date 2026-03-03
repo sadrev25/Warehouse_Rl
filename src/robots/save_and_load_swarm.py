@@ -4,9 +4,7 @@ import gzip
 import pickle
 from typing import TYPE_CHECKING, Callable, List
 
-import lcm
 import numpy as np
-from src.visualize.swarm_visualization import SwarmVisualization
 
 if TYPE_CHECKING:
     from robots.robot_swarm import RobotSwarm

@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 import abc
+import logging
 import multiprocessing
 import threading
 import time
 from multiprocessing import Array, Lock
 from typing import TYPE_CHECKING
 
-import lcm
 import numpy as np
 from helper_functions import l2_norm
-from lcm_types.itmessage import vector_t
 from robots.sensors.position_monitor import PositionMonitor, SimulatedPositionSensor
 
 # pyright: reportAttributeAccessIssue=false
@@ -26,8 +25,8 @@ class RobotState:
         self.position = None
         self.velocity = np.array([0.0, 0.0])
         self.has_load = False
-        self.next_waypoints = []
-        self.estimated_time_to_waypoints = []
+        self.next_waypoints = np.array([])
+        self.time_to_next_waypoints = np.array([])
         self.priority = 0.0
         self.lidar_info_obj = []
         self.robot_info = []
@@ -60,15 +59,10 @@ class RobotState:
         self.adapted_target_pos = adapted_target_pos
 
     def set_path_info(
-        self,
-        next_waypoints: np.ndarray,
-        distance_to_waypoints: np.ndarray,
-        max_vel: float,
+        self, next_waypoints: np.ndarray, time_to_next_waypoints: np.ndarray
     ):
         self.next_waypoints = next_waypoints
-        self.estimated_time_to_waypoints = (
-            distance_to_waypoints / max_vel
-        )  # assume that the robot can quickly reach the maximum velocity even if idle
+        self.time_to_next_waypoints = time_to_next_waypoints
 
     def set_priority(self, task_priority: float):
         self.priority = task_priority
@@ -87,12 +81,38 @@ class StateHandler(metaclass=abc.ABCMeta):
         self.current_robot_state = RobotState()
 
     def get_current_state(self) -> RobotState:
-        self._update_state()
+        # logging.warning(f"get current state {self.current_robot_state}")
+        return self.current_robot_state
+
+    def update_task_info(
+        self,
+        task_priority,
+        final_target_position,
+        next_waypoints,
+        time_to_next_waypoints,
+    ) -> None:
+        self.current_robot_state.set_priority(task_priority)
+        self.current_robot_state.set_final_target_position(final_target_position)
+        self.current_robot_state.set_path_info(next_waypoints, time_to_next_waypoints)
         self.current_robot_state.set_load_info(
             self.load_sensor.is_carrying_load() if self.load_sensor else False
         )
+        # logging.warning(f"update task info {self.current_robot_state.__dict__}")
 
-        return self.current_robot_state
+    def update_lidar_info(
+        self,
+        shelf_positions_in_range: list,
+        robot_positions_in_range: list,
+        current_target: np.ndarray,
+        adapted_target_position: np.ndarray,
+    ):
+
+        self.current_robot_state.set_lidar_info(
+            shelf_positions_in_range, robot_positions_in_range
+        )
+        self.current_robot_state.set_current_target_position(current_target)
+        self.current_robot_state.set_adapted_target_position(adapted_target_position)
+        # logging.warning(f"update lidar info {self.current_robot_state.__dict__}")
 
     @abc.abstractmethod
     def get_current_position(self) -> np.ndarray:
@@ -102,9 +122,12 @@ class StateHandler(metaclass=abc.ABCMeta):
     def get_current_velocity(self) -> np.ndarray:
         raise NotImplementedError()
 
+    def get_time_stamp(self) -> float:
+        return self.current_robot_state.time_stamp
+
     @abc.abstractmethod
-    def _update_state(self) -> None:
-        """Receive the robot's current state and save it to the state history."""
+    def _update_ts_and_position(self) -> None:
+        """Receive the robot's current position and velocity and save it to the state. Additionally, the time stamp is updated."""
         raise NotImplementedError()
 
     def set_load_sensor(self, load_sensor: LoadSensor):
@@ -135,19 +158,21 @@ class BasicStateHandler(StateHandler):
         self.state_monitor = state_monitor
 
     def get_current_position(self) -> np.ndarray:
-        self._update_state()
+        # logging.warning(f"get position {self.current_robot_state.__dict__}")
+        self._update_ts_and_position()
         assert self.current_robot_state.position is not None
         return self.current_robot_state.position
 
     def get_current_velocity(self) -> np.ndarray:
-        self._update_state()
+        # logging.warning(f"get velocity {self.current_robot_state.__dict__}")
         return self.current_robot_state.velocity
 
-    def _update_state(self) -> None:
+    def _update_ts_and_position(self) -> None:
         """Get the current state from the state monitor."""
         assert type(self.state_monitor) is SimulatedPositionSensor
         current_position = self.state_monitor.get_current_position()
         current_velocity = self.state_monitor.get_current_velocity()
+        assert current_velocity is not None
 
         time_stamp = np.round(time.time() - self.start_time, decimals=1)
 
@@ -156,89 +181,3 @@ class BasicStateHandler(StateHandler):
             position=current_position, velocity=current_velocity
         )
         return
-
-
-class LCM_StateHandler(StateHandler):
-    """Uses LCM to receive the robot state sent by a state monitor."""
-
-    def __init__(
-        self,
-        communication_id: int,
-        ts_control: float = 0.2,
-        ttl: int = 0,
-        **kwargs,
-    ) -> None:
-        super().__init__(ts_control)
-
-        # The communication id refers to the robot id used for robot-specific communication. When using hardware robots, the communication id might differ from the robot id.
-        self.communication_id = communication_id
-        self.pause_between_updating = self.ts_control / 3
-        # self.update_thread = threading.Thread(target=self._update_state, daemon=True)
-        self.position = Array("f", [0, 0], lock=True)
-        self._lock = self.position.get_lock()
-
-        # Uses sequential message numbers to order messages received via UDP.
-        self.seq_number_pos = 0
-        self.lc = lcm.LCM(f"udpm://239.255.76.67:7667?ttl={ttl}")
-        lcs = self.lc.subscribe(
-            f"/robot{self.communication_id}/euler", self._lcm_handler
-        )
-        lcs.set_queue_capacity(1)
-
-        self.update_process = multiprocessing.Process(
-            target=self._update_state,
-            args=(),
-            daemon=True,
-        )
-
-    def get_current_position(self) -> np.ndarray:
-        with self._lock:
-            current_position = np.array(self.position)
-        return current_position
-
-    def get_current_velocity(self) -> np.ndarray:
-        return self.current_robot_state.velocity
-
-    def _update_state(self) -> None:
-        """Listen to LCM messages that contain the robot state."""
-        while self.is_updating:
-            # timeout in ms
-            self.lc.handle_timeout(int(3 * self.ts_control * 1000))
-            time_stamp = np.round(time.time() - self.start_time, decimals=1)
-            # self.current_robot_state = RobotState(
-            #     time_stamp=time_stamp,
-            #     position=np.array(self.position),
-            # TODO: does not work, state handler does not have access to this
-            # TODO: communication of load, speed (+ multiprocessing for robot state?)
-            # )
-            time.sleep(self.pause_between_updating)
-        print("state_handler: stop listening")
-
-    def _lcm_handler(self, _: str, state: bytes) -> None:
-        """Read the LCM message containing the robot state that was sent by a state monitor.
-
-        Args:
-            state (vector_t): message
-        """
-        assert type(state) == vector_t
-        msg = vector_t.decode(state)
-        with self._lock:
-            if msg.seq_number > self.seq_number_pos:
-                self.seq_number_pos = msg.seq_number
-                current_position = np.array(msg.value)[:2]
-                self.position[:] = current_position
-        return
-
-    def start(self) -> None:
-        super().start()
-        self.update_process.start()
-        return
-
-    def stop(self) -> None:
-        super().stop()
-        while self.update_process.is_alive():
-            self.update_process.terminate()
-
-    def reset(self) -> None:
-        super().reset()
-        self.position[:] = np.zeros(2)
