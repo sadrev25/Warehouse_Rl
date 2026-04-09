@@ -10,8 +10,13 @@ from typing import TYPE_CHECKING
 
 import lcm
 import numpy as np
-from lcm_types.itmessage import vector_t
-
+try:
+    import lcm
+    from lcm_types.itmessage import vector_t
+except ImportError:
+    lcm = None
+    vector_t = None
+    
 if TYPE_CHECKING:
     from robots.deployment_robot import Robot
     from robots.robot_modules.state_handler import RobotState, StateHandler

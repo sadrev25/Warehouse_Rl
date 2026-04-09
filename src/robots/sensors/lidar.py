@@ -253,8 +253,8 @@ class Lidar:
 
         else:
             # exclude intersections with distance 0 that arise from the collision(s)
+            d_ij = np.atleast_1d(np.array(d_ij, dtype=float))
             d_ij_exclude_collisions = d_ij[d_ij > 1e-5]
-
             # preferable direction since all collisions distances are close to 0
             if len(d_ij_exclude_collisions) == 0:
                 return bool(is_colliding), float(np.inf)

@@ -142,7 +142,7 @@ class WarehouseRobot(Robot):
             # t0 = time.time()
             swarm_state = self.swarm_communication_handler.get_swarm_info()
 
-            if swarm_state[self.id].time_stamp > 1000 and stop_execution is not None:
+            if swarm_state[self.id].time_stamp > 2000 and stop_execution is not None:
                 stop_execution.set()
                 logging.warning(f"max time exceeded")
 
@@ -165,7 +165,7 @@ class WarehouseRobot(Robot):
             # t0 = time.time()
             swarm_state = self.swarm_communication_handler.get_swarm_info()
 
-            if swarm_state[self.id].time_stamp > 1000 and stop_execution is not None:
+            if swarm_state[self.id].time_stamp > 2000 and stop_execution is not None:
                 stop_execution.set()
                 logging.warning(f"max time exceeded")
 
@@ -562,179 +562,90 @@ class WarehouseRobot(Robot):
         return
 
 
-# class AntagonisticWarehouseRobot(WarehouseRobot):
+class AntagonisticWarehouseRobot(WarehouseRobot):
+    """
+    A WarehouseRobot that broadcasts a manipulated state to the swarm.
 
-#     def __init__(
-#         self,
-#         robot_id,
-#         color,
-#         state_handler,
-#         move_handler,
-#         swarm_communication_handler,
-#         load_sensor,
-#         lidar_sensor,
-#         ts_control,
-#         ts_communicate,
-#         max_vel,
-#         wait_for_ts_communicate,
-#         **kwargs,
-#     ):
-#         super().__init__(
-#             robot_id,
-#             color,
-#             state_handler,
-#             move_handler,
-#             swarm_communication_handler,
-#             load_sensor,
-#             lidar_sensor,
-#             ts_control,
-#             ts_communicate,
-#             max_vel,
-#             wait_for_ts_communicate,
-#             **kwargs,
-#         )
+    PPO sets these three attributes via the RL env before each episode:
+        _fake_priority    (float 0-10)  — broadcasted task priority
+        _fake_has_load    (bool)        — broadcasted load status
+        _fake_time_offset (float, sec)  — shift added to est. waypoint arrival times
+                                          use negative values to claim early arrival
+                                          → forces other robots to yield at crossings
 
-#     def choose_antagonistic_behavior(
-#         self, swarm_info: dict, lidar_info: list, own_state: RobotState
-#     ) -> dict:
-#         """
-#         - embed previous state
-#             - use both own communicated and own correct state?
-#             - include lidar information
-#         - predict antagonistic behavior:
-#         [action, speed, load, priority]
-#         - convert 3d action to 2d action
-#         """
-#         return {}
+    Physical movement, lidar, and path planning are identical to WarehouseRobot.
+    Only what gets broadcast to the swarm is manipulated.
 
-#     def update_swarm_state(
-#         self,
-#         robot_swarm: RobotSwarm,
-#         task: Task,
-#         path: Path,
-#         target_pos: np.ndarray,
-#     ) -> dict:
-#         """
-#         - get own state and most recent swarm state
-#         - predict antagonistic behavior
-#         - compute next state to communicate based on the selected behavior
-#         - communicate to swarm
-#         """
+    How the attack works:
+        BasicCommunicationHandler._send_info_to_swarm() calls
+        self.robot.get_last_recorded_state() every ts_communicate seconds
+        and pushes the result into swarm.add_communicated_state().
+        Every cooperative robot then reads this inside
+        are_next_crossings_available() and decides whether to yield.
+        Lying here causes real traffic disruption without any collision.
+    """
 
-#         swarm_state = self.swarm_communication_handler.get_swarm_info(
-#             robot_swarm=robot_swarm
-#         )
-#         # TODO: move partially to state handler, only pass high level info
-#         # i.e., state handler has access to all sensors
-#         # use state handler to save states
-#         correct_state = self.state_handler.get_current_state()
+    def __init__(
+        self,
+        robot_id,
+        color,
+        state_handler,
+        move_handler,
+        swarm_communication_handler,
+        load_sensor,
+        lidar_sensor,
+        ts_control,
+        ts_communicate,
+        max_vel,
+        wait_for_ts_communicate,
+        **kwargs,
+    ):
+        super().__init__(
+            robot_id,
+            color,
+            state_handler,
+            move_handler,
+            swarm_communication_handler,
+            load_sensor,
+            lidar_sensor,
+            ts_control,
+            ts_communicate,
+            max_vel,
+            wait_for_ts_communicate,
+            **kwargs,
+        )
+        # PPO sets these before each episode. None = no manipulation.
+        self._fake_priority    = None
+        self._fake_has_load    = None
+        self._fake_time_offset = 0.0
 
-#         correct_state.set_priority(task_priority=task.priority)
-#         correct_state.set_final_target_position(final_target_position=target_pos)
-#         correct_state.set_load_info(
-#             self.load_sensor.is_carrying_load() if self.load_sensor else False
-#         )
-#         next_waypoints, distance_to_waypoints = path.get_next_path_waypoints(
-#             max_dist=self.lookahead_dist_waypoints,
-#             current_pos=self._get_current_position(),
-#         )
-#         correct_state.set_path_info(
-#             next_waypoints, distance_to_waypoints, max_vel=self.max_vel
-#         )
-
-#         (
-#             _,
-#             object_positions_in_range,
-#             _,
-#             _,
-#         ) = self.lidar_sensor.get_lidar_info(
-#             rcp=self._get_current_position(),
-#             robot_target=self.current_target,
-#             warehouse=self.deployment_area,
-#             path=path,
-#         )
-
-#         antagonistic_behavior = self.choose_antagonistic_behavior(
-#             swarm_info=swarm_state,
-#             own_state=correct_state,
-#             lidar_info=object_positions_in_range,
-#         )
-
-#         antagonistic_state = RobotState()
-#         antagonistic_state.set_motion_info(
-#             position=correct_state.position,  # type: ignore
-#             velocity=antagonistic_behavior["speed"],
-#         )
-#         antagonistic_state.set_time_stamp(
-#             time_stamp=correct_state.time_stamp,
-#         )
-#         antagonistic_state.set_priority(task_priority=antagonistic_behavior["priority"])
-#         antagonistic_state.set_load_info(antagonistic_behavior["load"])
-#         self.next_action = antagonistic_behavior["action"]
-
-#         antagonistic_state.set_final_target_position(final_target_position=target_pos)
-#         antagonistic_state.set_path_info(
-#             next_waypoints, distance_to_waypoints, max_vel=self.max_vel
-#         )
-
-#         self.swarm_communication_handler.send_info_to_swarm(
-#             own_state=antagonistic_state, robot_swarm=robot_swarm
-#         )
-
-#         return swarm_state
-
-#     def update_target_position(  # pyright: ignore[reportIncompatibleMethodOverride]
-#         self,
-#         **args,
-#     ) -> None:
-
-#         self.current_target = self._get_current_position() + self.next_action
-#         return
-
-#     def update_position(  # pyright: ignore[reportIncompatibleMethodOverride]
-#         self, swarm_info: dict, path: Path
-#     ) -> None:
-#         """
-#         Executes the robot actions during one communication timestep ts_communicate. Based on the current target position and the information of the lidar sensor, a motion_vector is determined and the motion of the robot is triggered.
-#         """
-#         own_state = swarm_info[self.id]
-#         # move for the duration of the control timestep ts_control before adapting the velocity
-#         n_iter = int(self.ts_communicate / self.ts_control)
-#         for i in range(n_iter):
-
-#             (
-#                 object_geometries_in_range,
-#                 object_positions_in_range,
-#                 _,
-#                 _,
-#             ) = self.lidar_sensor.get_lidar_info(
-#                 rcp=self._get_current_position(),
-#                 robot_target=self.current_target,
-#                 warehouse=self.deployment_area,
-#                 path=path,
-#             )
-#             own_state.set_lidar_info(object_positions_in_range)
-#             with self._state_lock:
-#                 self.state_history += [own_state]
-
-#             current_motion_vector = self.current_target - self._get_current_position()
-
-#             # fail safe collision avoidance assuming that the robot cannot change its direction fast enough
-#             is_colliding, collision_distance = self.lidar_sensor.check_for_collision(
-#                 rcp=self._get_current_position(),
-#                 target_pos=self.current_target,
-#                 object_geometries=object_geometries_in_range,
-#             )
-#             if (
-#                 is_colliding or collision_distance < self.fail_safe_trigger
-#             ) and own_state.speed > 1e-2:
-#                 current_motion_vector = np.zeros_like(current_motion_vector)
-
-#             self.trigger_movement(current_motion_vector, self.adapted_vel)
-
-#             if self.wait_for_ts_communicate:
-#                 time.sleep(self.ts_control)
-
-#     def stop(self) -> None:
-#         super().stop()
-#         # TODO: add run to replay buffer
+    def get_last_recorded_state(self) -> RobotState:
+        real_state = super().get_last_recorded_state()
+        if self._fake_priority is None and self._fake_has_load is None:
+            return real_state
+        hotspots = [
+            np.array([15.92, 7.70]),
+            np.array([14.07, 6.53]),
+            np.array([15.93, 6.55]),
+            np.array([22.30, 6.56]),
+            np.array([10.01, 9.87]),
+        ]
+        pos = real_state.position
+        if pos is None:
+            return real_state
+        dist_to_hotspot = min(np.linalg.norm(pos - h) for h in hotspots)
+        if dist_to_hotspot > 6.0:
+            return real_state
+        fake_state = RobotState()
+        fake_state.set_time_stamp(time_stamp=real_state.time_stamp)
+        fake_state.set_motion_info(position=real_state.position, velocity=real_state.velocity)
+        fake_state.set_priority(task_priority=self._fake_priority if self._fake_priority is not None else real_state.priority)
+        fake_state.set_load_info(self._fake_has_load if self._fake_has_load is not None else real_state.has_load)
+        fake_state.set_final_target_position(final_target_position=getattr(real_state, 'final_target_position', np.zeros(2)))
+        if real_state.next_waypoints is not None and real_state.next_waypoints.size > 0:
+            safe_offset = np.clip(self._fake_time_offset, -3.0, 0.0)
+            fake_time = np.clip(real_state.time_to_next_waypoints + safe_offset, a_min=0.0, a_max=None)
+            fake_state.set_path_info(next_waypoints=real_state.next_waypoints, time_to_next_waypoints=fake_time)
+        else:
+            fake_state.set_path_info(next_waypoints=real_state.next_waypoints, time_to_next_waypoints=real_state.time_to_next_waypoints)
+        return fake_state

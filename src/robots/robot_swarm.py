@@ -15,9 +15,9 @@ from visualization.swarm_visualization import SwarmVisualization
 from warehouse_env.task import Task
 from warehouse_env.warehouse import Warehouse
 
-from learning_antagonistic_behavior.robots.sensors.position_monitor import (
-    PositionMonitor,
-)
+#from learning_antagonistic_behavior.robots.sensors.position_monitor import (
+#    PositionMonitor,
+#)
 
 if TYPE_CHECKING:
     from anomaly_detectors.anomaly_detector import AnomalyDetector
@@ -295,7 +295,10 @@ class WarehouseSwarm(RobotSwarm):
         self.run_duration = np.round(time.time() - self.start_time, decimals=2)
 
         for task_proc in started_tasks:
-            task_proc.join()
+            task_proc.join(timeout=2100)  # wait max 35 minutes per process
+            if task_proc.is_alive():
+                task_proc.terminate()
+                task_proc.join()
 
         for task_proc in started_tasks:
             task_proc.close()

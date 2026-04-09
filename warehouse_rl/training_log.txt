@@ -1,0 +1,1825 @@
+nohup: ignoring input
+/home/itm/msadasivam/Desktop/Warehouse_RL/venv/lib/python3.10/site-packages/stable_baselines3/common/on_policy_algorithm.py:150: UserWarning: You are trying to run PPO on the GPU, but it is primarily intended to run on the CPU when not using a CNN policy (you are using ActorCriticPolicy which should be a MlpPolicy). See https://github.com/DLR-RM/stable-baselines3/issues/1245 for more info. You can pass `device='cpu'` or `export CUDA_VISIBLE_DEVICES=` to force using the CPU.Note: The model will train, but the GPU utilization will be poor and the training might take longer than on CPU.
+  warnings.warn(
+Using cuda device
+Wrapping the env in a DummyVecEnv.
+============================================================
+PPO Antagonist Training
+  n_robots:            12
+  max_tasks/episode:   24
+  baseline throughput: 0.0552 tasks/sec
+  est. time/episode:   ~435s
+  total_timesteps=50 → est. total time: ~3.8 hours
+============================================================
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+Logging to ./tb_logs/PPO_7
+WARNING:root:robot 7 brown collision at 93.4
+WARNING:root:robot 6 pink collision at 93.4
+WARNING:root:robot 6 pink collision resolved at 95.2
+WARNING:root:robot 7 brown collision resolved at 95.3
+robot 8 starts task at 2.85
+robot 7 starts task at 2.78
+robot 3 starts task at 2.73
+robot 5 starts task at 2.75
+robot 4 starts task at 2.73
+robot 6 starts task at 2.76
+robot 10 starts task at 2.87
+robot 11 starts task at 2.87
+robot 0 starts task at 2.64
+robot 2 starts task at 2.72
+robot 8 starts task at 125.31
+robot 9 starts task at 2.85
+robot 1 starts task at 2.67
+robot 6 starts task at 185.87
+robot 9 starts task at 237.11
+robot 11 starts task at 215.81
+robot 10 starts task at 211.46
+robot 8 starts task at 231.53
+robot 5 starts task at 149.54
+robot 7 starts task at 134.74
+robot 4 starts task at 156.05
+robot 0 starts task at 216.29
+robot 2 starts task at 225.53
+robot 3 starts task at 138.82
+WARNING:root:13 tasks done for 12 robots in 245.57 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+WARNING:root:robot 5 yellow collision at 55.4
+WARNING:root:robot 5 yellow collision resolved at 57.1
+robot 8 starts task at 2.79
+robot 7 starts task at 2.81
+robot 3 starts task at 2.65
+robot 5 starts task at 2.7
+robot 8 starts task at 59.46
+WARNING:root:robot 8 gray collision at 171.6
+WARNING:root:robot 2 green collision at 171.6
+WARNING:root:robot 8 gray collision resolved at 173.3
+WARNING:root:robot 2 green collision resolved at 173.3
+robot 10 starts task at 2.87
+robot 1 starts task at 2.61
+robot 2 starts task at 2.63
+robot 0 starts task at 2.6
+robot 5 starts task at 166.74
+robot 3 starts task at 111.93
+robot 2 starts task at 255.21
+WARNING:root:robot 3 red collision at 345.8
+WARNING:root:robot 1 orange collision at 345.9
+WARNING:root:robot 9 olive collision at 347.9
+WARNING:root:robot 9 olive collision resolved at 349.2
+WARNING:root:robot 9 olive collision at 349.6
+WARNING:root:robot 9 olive collision resolved at 352.3
+WARNING:root:robot 9 olive collision at 352.5
+WARNING:root:robot 9 olive collision resolved at 355.7
+WARNING:root:robot 9 olive collision at 355.9
+robot 8 starts task at 168.76
+robot 10 starts task at 230.73
+robot 5 starts task at 288.4
+robot 9 starts task at 2.87
+robot 11 starts task at 2.87
+robot 7 starts task at 95.73
+robot 3 starts task at 294.65
+robot 0 starts task at 256.17
+robot 4 starts task at 2.66
+robot 2 starts task at 331.74
+robot 1 starts task at 246.82
+robot 6 starts task at 2.73
+WARNING:root:13 tasks done for 12 robots in 385.2 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 2.72
+robot 4 starts task at 2.63
+robot 7 starts task at 2.7
+robot 3 starts task at 2.58
+robot 5 starts task at 2.63
+robot 8 starts task at 59.35
+robot 6 starts task at 2.63
+robot 3 starts task at 111.61
+robot 11 starts task at 2.74
+robot 10 starts task at 2.74
+robot 9 starts task at 2.72
+robot 2 starts task at 2.56
+robot 0 starts task at 2.54
+robot 8 starts task at 168.69
+robot 1 starts task at 2.56
+robot 4 starts task at 86.07
+robot 5 starts task at 166.57
+robot 7 starts task at 95.81
+robot 6 starts task at 184.49
+robot 3 starts task at 204.8
+robot 2 starts task at 242.14
+robot 9 starts task at 227.41
+robot 10 starts task at 222.38
+robot 11 starts task at 214.73
+WARNING:root:13 tasks done for 12 robots in 253.5 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 2.91
+robot 7 starts task at 2.93
+robot 3 starts task at 2.79
+robot 8 starts task at 59.66
+robot 5 starts task at 2.86
+robot 11 starts task at 2.95
+robot 10 starts task at 2.94
+robot 2 starts task at 2.72
+robot 0 starts task at 2.68
+robot 1 starts task at 2.72
+robot 8 starts task at 166.83
+robot 3 starts task at 112.02
+robot 2 starts task at 240.17
+robot 11 starts task at 215.22
+robot 8 starts task at 278.02
+robot 9 starts task at 2.95
+robot 4 starts task at 2.86
+robot 10 starts task at 221.38
+robot 7 starts task at 96.02
+robot 5 starts task at 167.06
+robot 3 starts task at 294.92
+robot 0 starts task at 251.79
+robot 1 starts task at 254.85
+robot 6 starts task at 2.91
+WARNING:root:13 tasks done for 12 robots in 323.76 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.09
+robot 7 starts task at 2.98
+robot 3 starts task at 2.97
+robot 8 starts task at 59.93
+robot 5 starts task at 2.98
+robot 10 starts task at 3.12
+robot 1 starts task at 2.84
+robot 2 starts task at 2.86
+robot 0 starts task at 2.72
+robot 8 starts task at 167.5
+robot 3 starts task at 113.66
+robot 2 starts task at 240.83
+WARNING:root:robot 3 red collision at 337.0
+WARNING:root:robot 1 orange collision at 337.2
+WARNING:root:robot 9 olive collision at 339.1
+WARNING:root:robot 9 olive collision resolved at 341.6
+WARNING:root:robot 9 olive collision at 342.0
+WARNING:root:robot 10 cyan collision at 409.2
+robot 5 starts task at 167.62
+robot 10 starts task at 224.21
+robot 0 starts task at 248.17
+robot 1 starts task at 239.9
+robot 7 starts task at 96.38
+robot 4 starts task at 2.97
+robot 11 starts task at 3.11
+robot 2 starts task at 318.94
+robot 3 starts task at 297.5
+robot 6 starts task at 2.97
+robot 9 starts task at 3.08
+robot 8 starts task at 279.17
+WARNING:root:13 tasks done for 12 robots in 420.41 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.01
+robot 4 starts task at 2.95
+robot 7 starts task at 3.04
+robot 3 starts task at 2.86
+robot 5 starts task at 2.99
+robot 6 starts task at 2.99
+robot 8 starts task at 59.93
+robot 3 starts task at 112.3
+robot 11 starts task at 3.11
+robot 10 starts task at 3.11
+robot 9 starts task at 3.04
+robot 2 starts task at 2.84
+robot 0 starts task at 2.71
+robot 3 starts task at 206.02
+robot 5 starts task at 166.57
+robot 7 starts task at 95.54
+robot 11 starts task at 216.8
+robot 8 starts task at 181.11
+robot 1 starts task at 2.86
+robot 2 starts task at 238.93
+robot 9 starts task at 230.72
+robot 4 starts task at 86.41
+robot 6 starts task at 180.85
+robot 10 starts task at 223.22
+WARNING:root:13 tasks done for 12 robots in 254.12 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+WARNING:root:robot 5 yellow collision at 57.7
+WARNING:root:robot 5 yellow collision resolved at 59.4
+robot 8 starts task at 3.61
+robot 4 starts task at 3.3
+robot 7 starts task at 3.68
+robot 3 starts task at 3.49
+robot 5 starts task at 3.31
+robot 8 starts task at 61.19
+robot 6 starts task at 3.48
+robot 3 starts task at 114.04
+robot 11 starts task at 3.72
+robot 0 starts task at 2.99
+robot 10 starts task at 3.72
+robot 9 starts task at 3.64
+robot 2 starts task at 3.09
+robot 9 starts task at 232.9
+robot 11 starts task at 219.45
+robot 3 starts task at 208.41
+robot 5 starts task at 168.63
+robot 4 starts task at 87.95
+robot 10 starts task at 228.02
+robot 6 starts task at 186.64
+robot 8 starts task at 180.5
+robot 1 starts task at 3.05
+robot 0 starts task at 220.03
+robot 7 starts task at 97.85
+WARNING:root:13 tasks done for 12 robots in 238.5 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.35
+robot 7 starts task at 3.26
+robot 3 starts task at 3.04
+robot 5 starts task at 3.42
+robot 8 starts task at 60.96
+robot 10 starts task at 3.45
+robot 1 starts task at 2.81
+robot 2 starts task at 2.92
+robot 0 starts task at 2.8
+robot 5 starts task at 153.05
+robot 3 starts task at 115.05
+robot 2 starts task at 257.46
+robot 8 starts task at 173.74
+robot 0 starts task at 258.9
+robot 11 starts task at 3.46
+robot 7 starts task at 96.45
+robot 2 starts task at 334.99
+robot 1 starts task at 251.53
+robot 9 starts task at 3.47
+robot 3 starts task at 301.8
+robot 10 starts task at 233.76
+robot 4 starts task at 3.22
+robot 5 starts task at 283.95
+robot 6 starts task at 3.46
+WARNING:root:13 tasks done for 12 robots in 388.87 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 1        |
+|    ep_rew_mean     | 0.019    |
+| time/              |          |
+|    fps             | 0        |
+|    iterations      | 1        |
+|    time_elapsed    | 2553     |
+|    total_timesteps | 8        |
+---------------------------------
+robot 8 starts task at 3.18
+robot 4 starts task at 3.05
+robot 7 starts task at 3.15
+robot 3 starts task at 2.98
+robot 5 starts task at 3.08
+robot 8 starts task at 60.63
+robot 6 starts task at 3.08
+robot 3 starts task at 114.46
+robot 11 starts task at 3.26
+robot 10 starts task at 3.24
+robot 2 starts task at 2.96
+robot 1 starts task at 2.93
+robot 9 starts task at 3.21
+robot 5 starts task at 151.05
+robot 0 starts task at 2.89
+robot 7 starts task at 96.1
+robot 4 starts task at 87.21
+robot 11 starts task at 216.97
+robot 3 starts task at 208.55
+robot 1 starts task at 250.15
+robot 8 starts task at 172.18
+robot 10 starts task at 233.4
+robot 6 starts task at 180.35
+robot 2 starts task at 247.17
+WARNING:root:13 tasks done for 12 robots in 258.52 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.0
+robot 4 starts task at 2.85
+robot 7 starts task at 3.0
+robot 3 starts task at 2.84
+robot 5 starts task at 2.89
+robot 6 starts task at 3.01
+robot 8 starts task at 60.65
+robot 3 starts task at 114.1
+robot 11 starts task at 3.05
+robot 10 starts task at 3.04
+robot 2 starts task at 2.78
+robot 1 starts task at 2.76
+robot 9 starts task at 3.0
+robot 6 starts task at 179.5
+robot 7 starts task at 96.4
+robot 4 starts task at 87.6
+robot 8 starts task at 179.7
+robot 3 starts task at 208.51
+robot 2 starts task at 239.97
+robot 10 starts task at 233.12
+robot 1 starts task at 240.08
+robot 11 starts task at 219.16
+robot 0 starts task at 2.77
+robot 5 starts task at 154.22
+WARNING:root:13 tasks done for 12 robots in 249.41 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.13
+robot 4 starts task at 3.03
+robot 7 starts task at 3.15
+robot 3 starts task at 2.98
+robot 5 starts task at 3.03
+robot 6 starts task at 3.08
+robot 8 starts task at 60.68
+robot 3 starts task at 114.07
+robot 11 starts task at 3.18
+robot 10 starts task at 3.13
+robot 2 starts task at 2.83
+robot 1 starts task at 2.83
+robot 9 starts task at 3.15
+robot 0 starts task at 2.81
+robot 2 starts task at 238.68
+robot 7 starts task at 96.03
+robot 1 starts task at 240.01
+robot 11 starts task at 217.38
+robot 6 starts task at 178.92
+robot 8 starts task at 179.9
+robot 3 starts task at 207.99
+robot 5 starts task at 155.02
+robot 10 starts task at 227.08
+robot 4 starts task at 86.2
+WARNING:root:13 tasks done for 12 robots in 248.45 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+WARNING:root:robot 5 yellow collision at 57.6
+WARNING:root:robot 1 orange collision at 57.8
+WARNING:root:robot 1 orange collision resolved at 59.5
+WARNING:root:robot 5 yellow collision resolved at 59.6
+robot 8 starts task at 3.22
+robot 4 starts task at 3.02
+robot 7 starts task at 3.15
+robot 3 starts task at 3.0
+robot 5 starts task at 3.15
+robot 8 starts task at 62.12
+robot 6 starts task at 3.15
+robot 3 starts task at 116.22
+robot 11 starts task at 3.22
+robot 0 starts task at 2.81
+robot 10 starts task at 3.24
+robot 9 starts task at 3.22
+robot 2 starts task at 3.07
+robot 0 starts task at 222.16
+robot 5 starts task at 171.31
+robot 11 starts task at 220.91
+robot 8 starts task at 183.97
+robot 7 starts task at 98.58
+robot 10 starts task at 226.9
+robot 4 starts task at 88.11
+robot 1 starts task at 2.87
+robot 9 starts task at 234.04
+robot 3 starts task at 211.9
+robot 6 starts task at 184.33
+WARNING:root:13 tasks done for 12 robots in 240.07 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.61
+robot 4 starts task at 3.2
+robot 7 starts task at 3.61
+robot 3 starts task at 3.08
+robot 5 starts task at 3.31
+robot 8 starts task at 60.75
+robot 6 starts task at 3.36
+robot 3 starts task at 114.13
+robot 11 starts task at 3.6
+robot 10 starts task at 3.61
+robot 9 starts task at 3.57
+robot 2 starts task at 3.0
+robot 0 starts task at 2.87
+robot 1 starts task at 2.88
+robot 7 starts task at 96.19
+robot 9 starts task at 230.8
+robot 5 starts task at 168.96
+robot 2 starts task at 236.96
+robot 6 starts task at 184.16
+robot 11 starts task at 218.13
+robot 8 starts task at 180.61
+robot 4 starts task at 87.1
+robot 3 starts task at 208.9
+robot 10 starts task at 225.08
+WARNING:root:13 tasks done for 12 robots in 258.7 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.58
+robot 7 starts task at 3.57
+robot 3 starts task at 3.32
+robot 5 starts task at 3.32
+robot 8 starts task at 61.21
+robot 0 starts task at 2.91
+robot 10 starts task at 3.56
+robot 2 starts task at 3.05
+robot 1 starts task at 3.0
+robot 5 starts task at 155.08
+robot 3 starts task at 114.16
+WARNING:root:robot 3 red collision at 311.2
+WARNING:root:robot 10 cyan collision at 311.2
+WARNING:root:robot 9 olive collision at 313.1
+WARNING:root:robot 9 olive collision resolved at 315.0
+WARNING:root:robot 10 cyan collision resolved at 315.4
+WARNING:root:robot 10 cyan collision at 316.2
+WARNING:root:robot 9 olive collision at 316.2
+WARNING:root:robot 9 olive collision resolved at 318.7
+WARNING:root:robot 9 olive collision at 318.9
+WARNING:root:robot 9 olive collision resolved at 320.7
+WARNING:root:robot 9 olive collision at 320.9
+WARNING:root:robot 9 olive collision resolved at 322.2
+WARNING:root:robot 9 olive collision at 322.4
+WARNING:root:robot 9 olive collision resolved at 324.4
+robot 2 starts task at 240.26
+WARNING:root:robot 9 olive collision at 324.6
+WARNING:root:robot 10 cyan collision resolved at 328.5
+WARNING:root:robot 10 cyan collision at 328.7
+WARNING:root:robot 2 green collision at 412.6
+robot 1 starts task at 240.84
+robot 5 starts task at 282.8
+robot 10 starts task at 229.25
+robot 7 starts task at 97.98
+robot 3 starts task at 300.49
+robot 8 starts task at 181.85
+robot 6 starts task at 3.56
+robot 9 starts task at 3.58
+robot 4 starts task at 3.33
+robot 2 starts task at 326.06
+robot 0 starts task at 220.2
+robot 11 starts task at 3.57
+WARNING:root:13 tasks done for 12 robots in 421.1 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+WARNING:root:robot 1 orange collision at 56.7
+WARNING:root:robot 1 orange collision resolved at 58.0
+robot 8 starts task at 3.7
+WARNING:root:robot 5 yellow collision at 72.3
+WARNING:root:robot 5 yellow collision resolved at 79.6
+robot 4 starts task at 3.65
+robot 7 starts task at 3.69
+robot 3 starts task at 3.62
+robot 6 starts task at 3.87
+robot 8 starts task at 61.4
+robot 5 starts task at 3.72
+robot 3 starts task at 113.83
+robot 11 starts task at 3.9
+robot 0 starts task at 3.25
+robot 10 starts task at 3.69
+robot 2 starts task at 3.57
+robot 1 starts task at 3.48
+robot 5 starts task at 184.83
+robot 2 starts task at 239.64
+robot 7 starts task at 97.92
+robot 8 starts task at 181.03
+robot 0 starts task at 229.6
+robot 4 starts task at 90.33
+robot 3 starts task at 208.0
+robot 10 starts task at 233.5
+robot 9 starts task at 3.9
+robot 6 starts task at 179.05
+robot 11 starts task at 218.08
+WARNING:root:13 tasks done for 12 robots in 248.44 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.79
+robot 4 starts task at 3.64
+robot 7 starts task at 3.77
+robot 3 starts task at 3.63
+robot 5 starts task at 3.66
+robot 8 starts task at 61.58
+robot 6 starts task at 3.63
+robot 3 starts task at 114.52
+robot 11 starts task at 3.85
+robot 0 starts task at 3.13
+robot 10 starts task at 3.77
+robot 9 starts task at 3.87
+robot 2 starts task at 3.51
+robot 1 starts task at 3.37
+robot 5 starts task at 169.81
+robot 9 starts task at 232.43
+robot 10 starts task at 227.06
+robot 3 starts task at 208.52
+robot 8 starts task at 181.5
+robot 4 starts task at 86.91
+robot 0 starts task at 220.46
+robot 7 starts task at 98.08
+robot 11 starts task at 218.63
+robot 6 starts task at 185.75
+WARNING:root:13 tasks done for 12 robots in 237.84 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+-----------------------------------------
+| rollout/                |             |
+|    ep_len_mean          | 1           |
+|    ep_rew_mean          | 0.0122      |
+| time/                   |             |
+|    fps                  | 0           |
+|    iterations           | 2           |
+|    time_elapsed         | 4775        |
+|    total_timesteps      | 16          |
+| train/                  |             |
+|    approx_kl            | 0.015261166 |
+|    clip_fraction        | 0.075       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.26       |
+|    explained_variance   | -7.27       |
+|    learning_rate        | 0.0003      |
+|    loss                 | -0.27       |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.0292     |
+|    std                  | 1           |
+|    value_loss           | 0.0132      |
+-----------------------------------------
+robot 8 starts task at 3.92
+robot 4 starts task at 3.72
+robot 7 starts task at 3.81
+WARNING:root:robot 11 magenta collision at 106.2
+WARNING:root:robot 0 cornflowerblue collision at 106.4
+WARNING:root:robot 11 magenta collision resolved at 107.5
+WARNING:root:robot 0 cornflowerblue collision resolved at 107.6
+WARNING:root:robot 11 magenta collision at 107.7
+WARNING:root:robot 0 cornflowerblue collision at 107.9
+WARNING:root:robot 11 magenta collision resolved at 109.7
+WARNING:root:robot 0 cornflowerblue collision resolved at 109.8
+robot 3 starts task at 3.71
+robot 5 starts task at 3.71
+robot 8 starts task at 61.53
+robot 6 starts task at 3.71
+robot 3 starts task at 113.83
+robot 11 starts task at 3.94
+robot 0 starts task at 3.17
+robot 10 starts task at 3.95
+robot 9 starts task at 3.95
+robot 2 starts task at 3.71
+robot 3 starts task at 208.79
+robot 5 starts task at 168.54
+robot 9 starts task at 234.41
+robot 0 starts task at 225.36
+robot 4 starts task at 87.9
+robot 7 starts task at 97.71
+robot 10 starts task at 228.19
+robot 11 starts task at 222.44
+robot 1 starts task at 3.4
+robot 6 starts task at 188.36
+robot 8 starts task at 169.26
+WARNING:root:13 tasks done for 12 robots in 244.2 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.82
+robot 4 starts task at 3.49
+robot 7 starts task at 3.77
+robot 3 starts task at 3.45
+WARNING:root:robot 2 green collision at 126.9
+WARNING:root:robot 8 gray collision at 127.0
+WARNING:root:robot 2 green collision resolved at 128.7
+WARNING:root:robot 8 gray collision resolved at 128.8
+WARNING:root:robot 2 green collision at 159.2
+WARNING:root:robot 2 green collision resolved at 161.3
+robot 5 starts task at 4.24
+robot 8 starts task at 62.55
+robot 6 starts task at 4.22
+robot 3 starts task at 115.67
+robot 0 starts task at 3.53
+robot 11 starts task at 4.24
+robot 10 starts task at 4.24
+robot 9 starts task at 3.86
+robot 1 starts task at 3.56
+robot 2 starts task at 3.5
+robot 6 starts task at 185.61
+robot 4 starts task at 89.26
+robot 0 starts task at 213.4
+robot 9 starts task at 233.9
+robot 10 starts task at 232.86
+robot 7 starts task at 99.63
+robot 5 starts task at 170.18
+robot 8 starts task at 179.77
+robot 3 starts task at 210.85
+robot 11 starts task at 220.47
+WARNING:root:13 tasks done for 12 robots in 248.7 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 4.01
+robot 7 starts task at 3.99
+WARNING:root:robot 11 magenta collision at 106.7
+WARNING:root:robot 0 cornflowerblue collision at 106.8
+WARNING:root:robot 0 cornflowerblue collision resolved at 108.5
+WARNING:root:robot 11 magenta collision resolved at 108.6
+robot 3 starts task at 3.66
+robot 5 starts task at 3.97
+robot 8 starts task at 61.19
+robot 0 starts task at 3.17
+robot 10 starts task at 4.16
+robot 2 starts task at 3.42
+robot 1 starts task at 3.43
+robot 5 starts task at 168.14
+robot 3 starts task at 113.91
+WARNING:root:robot 10 cyan collision at 309.4
+WARNING:root:robot 3 red collision at 309.5
+WARNING:root:robot 9 olive collision at 311.6
+WARNING:root:robot 9 olive collision resolved at 313.1
+WARNING:root:robot 9 olive collision at 313.6
+robot 2 starts task at 238.41
+WARNING:root:robot 9 olive collision resolved at 321.4
+WARNING:root:robot 9 olive collision at 321.6
+robot 8 starts task at 180.93
+robot 3 starts task at 298.93
+robot 10 starts task at 224.78
+robot 5 starts task at 291.23
+robot 6 starts task at 4.02
+robot 11 starts task at 4.14
+robot 2 starts task at 316.04
+robot 0 starts task at 218.54
+robot 1 starts task at 258.78
+robot 4 starts task at 3.7
+robot 7 starts task at 97.75
+robot 9 starts task at 4.16
+WARNING:root:13 tasks done for 12 robots in 396.82 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 2.91
+robot 4 starts task at 2.79
+robot 7 starts task at 2.88
+robot 3 starts task at 2.77
+WARNING:root:robot 2 green collision at 123.7
+WARNING:root:robot 8 gray collision at 123.8
+WARNING:root:robot 8 gray collision resolved at 125.6
+WARNING:root:robot 2 green collision resolved at 125.7
+robot 5 starts task at 2.81
+robot 8 starts task at 59.83
+robot 6 starts task at 2.86
+robot 3 starts task at 112.42
+robot 0 starts task at 2.69
+robot 11 starts task at 3.0
+robot 10 starts task at 2.96
+robot 9 starts task at 2.94
+robot 1 starts task at 2.71
+robot 10 starts task at 227.15
+robot 8 starts task at 177.67
+robot 6 starts task at 185.3
+robot 2 starts task at 2.74
+robot 7 starts task at 96.38
+robot 11 starts task at 216.18
+robot 3 starts task at 205.67
+robot 9 starts task at 230.02
+robot 5 starts task at 168.01
+robot 0 starts task at 209.9
+robot 4 starts task at 86.38
+WARNING:root:13 tasks done for 12 robots in 243.74 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.04
+robot 4 starts task at 3.03
+robot 7 starts task at 3.07
+robot 3 starts task at 2.98
+WARNING:root:robot 2 green collision at 124.1
+WARNING:root:robot 8 gray collision at 124.2
+WARNING:root:robot 8 gray collision resolved at 126.0
+WARNING:root:robot 2 green collision resolved at 126.0
+robot 5 starts task at 3.03
+robot 8 starts task at 60.02
+robot 6 starts task at 3.04
+robot 3 starts task at 112.89
+robot 11 starts task at 3.08
+robot 10 starts task at 3.07
+robot 9 starts task at 3.04
+robot 2 starts task at 2.91
+robot 1 starts task at 2.81
+robot 3 starts task at 206.65
+robot 6 starts task at 184.4
+robot 8 starts task at 181.52
+robot 9 starts task at 230.12
+robot 5 starts task at 167.85
+robot 11 starts task at 216.64
+robot 4 starts task at 85.96
+robot 7 starts task at 96.99
+robot 0 starts task at 2.79
+robot 10 starts task at 224.24
+robot 2 starts task at 237.52
+WARNING:root:13 tasks done for 12 robots in 240.94 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.06
+robot 7 starts task at 3.0
+robot 3 starts task at 2.88
+robot 5 starts task at 2.95
+robot 8 starts task at 60.05
+robot 0 starts task at 2.72
+robot 10 starts task at 3.07
+robot 2 starts task at 2.82
+robot 1 starts task at 2.76
+robot 5 starts task at 167.88
+robot 3 starts task at 113.54
+WARNING:root:robot 0 cornflowerblue collision at 310.1
+WARNING:root:robot 10 cyan collision at 310.0
+WARNING:root:robot 9 olive collision at 314.3
+WARNING:root:robot 0 cornflowerblue collision resolved at 316.6
+WARNING:root:robot 0 cornflowerblue collision at 317.7
+robot 2 starts task at 237.43
+WARNING:root:robot 3 red collision at 399.3
+WARNING:root:robot 2 green collision at 401.4
+WARNING:root:robot 2 green collision resolved at 403.4
+robot 8 starts task at 180.17
+robot 9 starts task at 3.06
+robot 5 starts task at 290.99
+robot 2 starts task at 319.46
+robot 4 starts task at 2.94
+robot 10 starts task at 224.36
+robot 1 starts task at 240.43
+robot 0 starts task at 218.26
+robot 11 starts task at 3.13
+robot 7 starts task at 96.52
+robot 3 starts task at 298.06
+robot 6 starts task at 3.0
+WARNING:root:13 tasks done for 12 robots in 411.76 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.21
+robot 4 starts task at 2.97
+robot 7 starts task at 3.11
+robot 3 starts task at 2.91
+robot 5 starts task at 3.01
+robot 8 starts task at 60.05
+robot 6 starts task at 3.09
+robot 3 starts task at 112.91
+robot 11 starts task at 3.21
+robot 0 starts task at 2.8
+robot 10 starts task at 3.21
+robot 9 starts task at 3.17
+robot 2 starts task at 2.94
+robot 6 starts task at 185.98
+robot 5 starts task at 167.13
+robot 0 starts task at 218.37
+robot 10 starts task at 224.18
+robot 1 starts task at 2.86
+robot 8 starts task at 180.31
+robot 4 starts task at 85.71
+robot 7 starts task at 96.74
+robot 11 starts task at 216.7
+robot 9 starts task at 229.33
+robot 3 starts task at 206.45
+WARNING:root:13 tasks done for 12 robots in 238.28 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.31
+robot 4 starts task at 3.09
+robot 7 starts task at 3.31
+robot 3 starts task at 3.06
+robot 5 starts task at 3.23
+robot 8 starts task at 60.29
+robot 6 starts task at 3.22
+robot 3 starts task at 114.37
+robot 11 starts task at 3.34
+robot 10 starts task at 3.34
+robot 9 starts task at 3.29
+robot 2 starts task at 2.94
+robot 0 starts task at 2.88
+robot 11 starts task at 216.54
+robot 10 starts task at 223.27
+robot 4 starts task at 86.0
+robot 7 starts task at 95.93
+robot 2 starts task at 235.17
+robot 9 starts task at 229.31
+robot 6 starts task at 184.78
+robot 5 starts task at 167.88
+robot 1 starts task at 2.92
+robot 8 starts task at 178.02
+robot 3 starts task at 207.74
+WARNING:root:13 tasks done for 12 robots in 253.24 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+-----------------------------------------
+| rollout/                |             |
+|    ep_len_mean          | 1           |
+|    ep_rew_mean          | 0.0126      |
+| time/                   |             |
+|    fps                  | 0           |
+|    iterations           | 3           |
+|    time_elapsed         | 7108        |
+|    total_timesteps      | 24          |
+| train/                  |             |
+|    approx_kl            | 0.007390864 |
+|    clip_fraction        | 0           |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.26       |
+|    explained_variance   | 1.45e-05    |
+|    learning_rate        | 0.0003      |
+|    loss                 | -0.25       |
+|    n_updates            | 20          |
+|    policy_gradient_loss | -0.0153     |
+|    std                  | 1           |
+|    value_loss           | 0.00293     |
+-----------------------------------------
+robot 8 starts task at 3.27
+robot 4 starts task at 3.21
+robot 7 starts task at 3.31
+robot 3 starts task at 3.18
+robot 5 starts task at 3.23
+robot 8 starts task at 60.52
+robot 6 starts task at 3.33
+robot 3 starts task at 114.37
+robot 11 starts task at 3.36
+robot 10 starts task at 3.33
+robot 9 starts task at 3.36
+robot 1 starts task at 2.99
+robot 2 starts task at 3.1
+robot 8 starts task at 177.19
+robot 5 starts task at 152.47
+robot 6 starts task at 177.48
+robot 7 starts task at 95.63
+robot 0 starts task at 2.92
+robot 9 starts task at 239.79
+robot 4 starts task at 86.12
+robot 1 starts task at 243.39
+robot 10 starts task at 226.73
+robot 3 starts task at 208.38
+robot 11 starts task at 216.64
+WARNING:root:13 tasks done for 12 robots in 249.33 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.47
+robot 4 starts task at 3.38
+robot 7 starts task at 3.38
+robot 3 starts task at 3.3
+robot 6 starts task at 3.38
+robot 8 starts task at 60.8
+robot 5 starts task at 3.48
+robot 3 starts task at 114.55
+robot 11 starts task at 3.51
+robot 0 starts task at 3.09
+robot 10 starts task at 3.5
+robot 2 starts task at 3.13
+robot 1 starts task at 3.02
+robot 3 starts task at 208.62
+robot 0 starts task at 228.2
+robot 7 starts task at 97.35
+robot 11 starts task at 217.3
+robot 8 starts task at 181.25
+robot 9 starts task at 3.49
+robot 4 starts task at 91.21
+robot 5 starts task at 184.11
+robot 10 starts task at 231.37
+robot 2 starts task at 236.83
+robot 6 starts task at 178.07
+WARNING:root:13 tasks done for 12 robots in 247.05 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.58
+robot 4 starts task at 3.45
+robot 7 starts task at 3.63
+robot 3 starts task at 3.36
+WARNING:root:robot 2 green collision at 124.4
+WARNING:root:robot 8 gray collision at 124.5
+WARNING:root:robot 8 gray collision resolved at 126.3
+WARNING:root:robot 2 green collision resolved at 126.4
+robot 5 starts task at 3.47
+robot 8 starts task at 61.0
+robot 6 starts task at 3.5
+robot 3 starts task at 114.77
+robot 11 starts task at 3.66
+robot 10 starts task at 3.72
+robot 9 starts task at 3.72
+robot 2 starts task at 3.37
+robot 0 starts task at 3.07
+robot 5 starts task at 169.02
+robot 9 starts task at 231.18
+robot 3 starts task at 208.76
+robot 6 starts task at 186.48
+robot 10 starts task at 223.88
+robot 1 starts task at 3.17
+robot 4 starts task at 87.8
+robot 11 starts task at 217.41
+robot 8 starts task at 178.47
+robot 2 starts task at 251.5
+robot 7 starts task at 96.79
+WARNING:root:13 tasks done for 12 robots in 262.69 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+WARNING:root:robot 1 orange collision at 56.6
+WARNING:root:robot 1 orange collision resolved at 58.1
+robot 8 starts task at 3.74
+robot 4 starts task at 3.49
+robot 7 starts task at 3.53
+robot 3 starts task at 3.49
+robot 5 starts task at 3.6
+robot 8 starts task at 60.92
+robot 6 starts task at 3.7
+robot 3 starts task at 113.87
+robot 11 starts task at 3.76
+robot 0 starts task at 3.05
+robot 10 starts task at 3.75
+robot 9 starts task at 3.67
+robot 2 starts task at 3.36
+robot 7 starts task at 97.18
+robot 10 starts task at 225.28
+robot 3 starts task at 207.98
+robot 5 starts task at 168.68
+robot 1 starts task at 3.39
+robot 0 starts task at 217.51
+robot 4 starts task at 87.51
+robot 8 starts task at 179.09
+robot 6 starts task at 184.52
+robot 9 starts task at 230.25
+robot 11 starts task at 217.23
+WARNING:root:13 tasks done for 12 robots in 237.54 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.89
+robot 4 starts task at 3.58
+robot 7 starts task at 3.94
+robot 3 starts task at 3.6
+WARNING:root:robot 2 green collision at 125.7
+WARNING:root:robot 8 gray collision at 125.8
+WARNING:root:robot 8 gray collision resolved at 127.6
+WARNING:root:robot 2 green collision resolved at 127.6
+robot 5 starts task at 3.58
+robot 8 starts task at 61.69
+robot 6 starts task at 3.92
+robot 3 starts task at 113.85
+robot 11 starts task at 3.79
+robot 0 starts task at 3.4
+WARNING:root:robot 1 orange collision at 221.2
+WARNING:root:robot 1 orange collision resolved at 223.2
+robot 10 starts task at 3.84
+robot 9 starts task at 3.92
+robot 7 starts task at 97.79
+robot 2 starts task at 3.56
+robot 11 starts task at 218.35
+robot 0 starts task at 220.82
+robot 3 starts task at 207.93
+robot 9 starts task at 232.23
+robot 8 starts task at 182.24
+robot 4 starts task at 87.59
+robot 5 starts task atrobot 8 starts task at 179.39
+robot 2 starts task at 319.85
+robot 0 starts task at 217.39
+robot 3 starts task at 296.92
+robot 4 starts task at 2.79
+robot 11 starts task at 2.95
+robot 9 starts task at 2.93
+robot 7 starts task at 96.4
+robot 1 starts task at 241.15
+robot 5 starts task at 289.61
+robot 6 starts task at 2.87
+robot 10 starts task at 223.86
+WARNING:root:13 tasks done for 12 robots in 411.78 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.96
+robot 4 starts task at 3.56
+robot 7 starts task at 3.92
+robot 3 starts task at 3.38
+WARNING:root:robot 2 green collision at 126.0
+WARNING:root:robot 8 gray collision at 126.1
+WARNING:root:robot 8 gray collision resolved at 127.9
+WARNING:root:robot 2 green collision resolved at 127.9
+WARNING:root:robot 8 gray robot 3 starts task at 2.79
+robot 5 starts task at 2.95
+robot 8 starts task at 60.17
+robot 6 starts task at 2.94
+robot 3 starts task at 112.52
+robot 11 starts task at 3.02
+robot 0 starts task at 2.73
+robot 10 starts task at 3.02
+robot 9 starts task at 2.99
+robot 7 starts task at 96.63
+robot 2 starts task at 2.74
+robot 11 starts task at 216.5
+robot 9 starts task at 230.5
+robot 6 starts task at 179.45
+robot 5 starts task at 152.33
+robot 3 starts task at 206.44
+robot 1 starts task at 2.71
+robot 10 starts task at 229.46
+robot 0 starts task at 225.93
+robot 4 starts task at 85.65
+robot 8 starts task at 168.89
+WARNING:root:13 tasks done for 12 robots in 243.15 seconds
+communication_handler: start listening and secommunication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communrobot 8 starts task at 3.29
+robot 7 starts task at 3.2
+WARNING:root:robot 11 magenta collision at 106.6
+WARNING:root:robot 0 cornrobot 3 starts task at 3.33
+robot 5 starts task at 3.37
+robot 8 starts task at 60.78
+robot 6 starts task at 3.39
+robot 3 starts task at 114.57
+robot 11 starts task at 3.59
+robot 10 starts task at 3.6
+robot 2 starts task at 3.16
+robot 1 starts task at 3.16
+robot 9 starts task at 3.58
+robot 11 starts task at 216.56
+robot 2 starts task at 247.6
+robot 3 starts task at 207.34
+robotrobot 5 starts task at 167.89
+robot 3 starts task at 114.07
+robot 0 starts task at 209.89
+robot 10 starts task at 222.46
+robot 2 starts task at 244.15
+robot 1 starts task at 238.92
+robot 9 starts task at 3.2
+robot 6 starts task at 3.04
+robot 11 starts task at 217.66
+robot 8 starts task at 170.13
+robot 5 starts task at 289.16
+robot 4 starts task at 2.97
+robot 7 starts task at 97.4
+robot 3 starts task at 296.47
+WARNING:root:13 tasks done for 12 robots in 331.98 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sendingrobot 7 starts task at 2.85
+robot 3 starts task at 2.73
+robot 5 starts task at 2.81
+robot 8 starts task at 59.56
+robot 0 starts task at 2.66
+robot 10 starts task at 2.95
+robot 2 starts task at 2.72
+robot 1 starts task at 2.67
+robot 5 starts task at 166.78
+robot 3 starts task at 112.7
+WARNING:root:robot 10 cyan collision at 306.1
+WARNING:root:robot 9 olive collision at 307.9
+WARNING:root:robot 9 olive collision resolved at 309.9
+WARNING:root:robot 9 olive collision at 310.1
+robot 2 starts task at 237.13
+WARNING:root:robot 9 olive collision resolved at 318.2
+WARNING:root:robot 9 olive collision at 319.4
+robot 8 starts task at 178.39
+robot 11 starts task at 2.97
+robot 7 starts task at 96.5
+robot 9 starts task at 2.95
+robot 10 starts task at 223.38
+robot 2 starts task at 314.23
+robot 5 starts task at 289.52
+robot 4 starts task at 2.76
+robot 3 starts task at 296.82
+robot 0 starts task at 216.91
+robot 6 starts task at 2.83
+robot 1 starts task at 257.7
+WARNING:root:13 tasks done for 12 robots in 390.66 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+-----------------------------------------
+| rollout/                |             |
+|    ep_len_mean          | 1     robot 4 starts task at 3.11
+robot 7 starts task at 3.34
+robot 3 starts task at 3.29
+robot 5 starts task at 3.34
+robot 8 starts task at 60.98
+robot 6 starts task at 3.56
+robot 3 starts task at 114.52
+robot 11 starts task at 3.6
+robot 10 starts task at 3.6
+robot 2 starts task at 3.09
+robot 1 starts task at 2.98
+robot 11 starts task at 216.94
+robot 0 starts task at 2.85
+robot 9 starts task at 3.56
+robot 5 starts task at 151.53
+robot 7 starts task at 96.22
+robot 2 starts task at 246.44
+robot 1 starts task at 247.7
+robot 10 starts task at 231.01
+robot 8 starts task at 171.3
+robot 4 starts task at 87.42
+robot 6 starts task at 181.42
+robot 3 starts task at 208.29
+WARNING:root:13 tasks done for 12 robots in 251.79 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler:robot 3 starts task at 112.88
+robot 11 starts task at 3.11
+robot 10 starts task at 3.11
+robot 9 starts task at 3.1
+robot 1 starts task at 2.95
+robot 2 starts task at 2.95
+robot 9 starts task at 230.29
+robot 10 starts task at 228.21
+robot 7 starts task at 96.23
+robot 4 starts task at 85.8
+robot 8 starts task at 177.28
+robot 5 starts task at 166.77
+robot 6 starts task at 181.94
+robot 11 starts task at 217.41
+robot 3 starts task at 206.94
+robot 1 starts task at 244.47
+robot 0 starts task at 2.77
+WARNING:root:13 tasks done for 12 robots in 250.45 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.17
+robot 4 starts task at 3.05
+robot 7 starts robot 8 starts task at 60.6
+robot 5 startrobot 8 starts task at 60.29
+robot 5 starts task at 3.09
+robot 6 starts task at 3.23
+robot 3 starts task at 113.37
+robot 11 strobot 8 starts task at 179.91
+robot 3 starts task at 113.75
+WARNING:root:robot 10 cyan collision at 31roboWARNING:root:robot 3 red collision at 324.6
+robot 2 starts task at 236.38
+WARNING:root:robot 3 red collision resolved at 345.0
+WARNING:root:robot 10 cyan collision resolved at 345.2
+robot 1 starts task at 240.57
+robot 5 starts task at 191.55
+robot 6 starts task at 3.5
+robot 8 starts task at 292.23
+robot 9 starts task at 3.5
+robot 11 starts task at 3.51
+robot 7 starts task at 97.57
+robot 0 starts task at 218.82
+robot 4 starts task at 3.5
+robot 2 starts task at 329.18
+robot 10 starts task at 224.7
+robot 3 starts task at 302.53
+WARNING:root:13 tasks done for 12 robots in 421.17 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: starrobot 3 starts task at 3.14
+robot 5 starts task at 3.41
+robot 8 starts task at 60.89
+robot 0 starts task at 2.95
+robot 11 starts task at 3.53
+robot 10 starts task at 3.51
+robot 2 starts task at 3.15
+robot 1 starts task at 3.32
+robot 5 starts task at 169.15
+robot 3 starts task at 114.58
+robot 10 starts task at 225.28
+robot 7 starts task at 97.42
+robot 11 starts task at 218.4
+robot 9 starts task at 3.49
+robot 5 starts task at 292.97
+robot 0 starts tarobot 2 starts task at 2.77
+robot 1 starts task at 2.74
+robot 5 starts task at 168.6
+robot 3 starts task at 113.46
+robot 10 starts task at 224.92
+robot 2 starts task at 239.33
+robot 7 starts task at 96.81
+robot 3 starts task at 298.23
+robot 6 starts task at 2.87
+robot 0 starts task at 220.64
+robot 11 starts task at 217.55
+robot 4 starts task at 2.84
+robot 8 starts task at 182.5
+robot 5 starts task at 292.26
+robot 1 starts task at 241.86
+robot 9 starts task at 2.96
+WARNING:root:13 tasks done for 12 robots in 335.37 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communicrobot 3 starts task at 3.21
+robot 5 starts task at 3.37
+robot 8 starts task at 60.81
+robot 6 starts task at 3.44
+robot 3 starts task at 114.86
+robot 11 starts task at 3.45
+robot 0 starts task at 2.96
+robot 10 starts task at 3.44
+robot 9 starts task at 3.4
+robot 2 starts task at 3robot 5 starts task at 2.81
+robot 8 starts task at 59.56
+robot 0 starts task at 2.69
+robot 10 starts task at 2.94
+robot 1 starts task at 2.71
+robot 2 starts task at 2.73
+robot 5 starts task at 167.2
+robot 3 starts task at 112.22
+WARNING:root:robot 10 cyan collision at 302.8
+WARNING:root:robot 9 olive collision at 303.0
+WARNING:root:robot 9 olive collision resolved at 304.3
+WARNING:root:robot 0 cornflowerblue collision at 308.8
+WARNING:root:robot 9 olive collision at 308.9
+WARNING:root:robot 9 olive collision resolved at 310.9
+WARNING:root:robot 3 red collision at 311.2
+WARNING:root:robot 9 olive collision at 311.6
+robot 1 starts task at 246.86
+robot 8 starts task at 170.41
+robot 5 starts task at 289.62
+robot 3 starts task at 296.43
+robot 2 starts task at 253.51
+robot 11 starts task at 2.96
+robot 6 starts task at 2.91
+robot 1 starts task at 338.51
+robot 7 starts task at 96.03
+robot 10 starts task at 231.4
+robot 0 starts task at 209.92
+robot 4 starts task at 2.78
+robot 9 starts task at 2.93
+WARNING:root:13 tasks done for 12 robots in 384.93 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communicatirobot 2 starts task at 3.2
+robot 5 starts task at 168.81
+robot 3 starts task at 114.67
+robot 1 starts task at 241.91
+robot 2 starts task at 246.01
+robot 0 starts task at 210.79
+robot 7 starts task at 97.44
+robot 6 starts task at 3.51
+robot 10 starts task at 225.54
+robot 4 starts task at 3.53
+robot 9 starts task at 3.68
+robot 3 starts task at 298.98
+robot 11 starts task at 3.73
+robot 8 starts task at 170.89
+robot 5 starts task at 291.74
+robot 1 starts task at 333.48
+WARNING:root:13 tasks done for 12 robots in 408.6 seconds
+communication_handler: start listening and sending
+communication_handler: start listeninrobot 6 starts task at 2.94
+robot 3 starts task at 112.58
+robot 0 starts task at 2.71
+robot 11 starts task at 3.04
+robot 10 starts task at 3.04
+robot 9 starts task at 3.04
+robot 2 starts task at 2.82
+robot 3 starts task at 206.57
+robot 6 starts task at 180.57
+robot 4 starts task at 85.38
+robot 10 starts task at 221.27
+robot 0 starts task at 211.65
+robot 8 starts task at 173.55
+robot 7 starts task at 96.82
+robot 11 starts task at 217.21
+robot 5 starts task at 166.93
+robot 1 starts task at 2.75
+robot 9 starts task at 231.21
+WARNING:root:13 tasks done for 12 robots in 249.07 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_robot 4 starts task at 3.66
+robot 7 starts task at 3.87
+robot 3 starts task at 3.55
+robot 5 starts task at 3.66
+robot 8 starts task at 62.12
+robot 6 starts task at 3.85
+robot 3 starts task at 114.31
+robot 11 starts task at 3.87
+robot 0 starts task at 3.05
+robot 10 starts task at 3.87
+robot 9 starts task at 3.88
+robot 2 starts task at 3.55
+robot 11 starts task at 219.28
+robot 9 starts task at 231.7
+robot 5 starts task at 170.71
+robot 1 starts task at 3.27
+robot 6 starts task at 186.64
+robot 0 starts task at 219.66
+robot 4 starts task at 88.55
+robot 8 starts task at 181.51
+robot 10 starts task at 225.99
+robot 7 starts task at 97.91
+robot 3 starts task at 208.64
+WARNING:root:13 tarobot 8 starts task at 60.46
+robot 6 starts task at 3.22
+robot 3 starts task at 114.51
+robot 11 starts task at 3.43
+robot 10 starts task at 3.39
+robot 9 starts task at 3.44
+robot 1 starts task at 2.8
+robot 2 starts task at 2.83
+robot 5 starts task at 152.03
+robot 4 starts task at 86.22
+robot 6 starts task at 178.87
+robot 9 starts task at 241.75
+robot 11 starts task at 217.19
+robot 8 starts task at 172.4
+robot 7 starts task at 96.51
+robot 10 starts task at 227.87
+robot 0 starts task at 2.77
+robot 1 starts task at 242.34
+robot 3 starts task at 208.13
+WARNING:root:13 tasks done for 12 robots in 249.24 seconds
+communication_handler: start listening and sending
+communication_harobot 7 starts task at 3.93
+robot 3 starts task at 3.79
+robot 5 starts task at 3.82
+robot 8 starts task at 62.41
+WARNING:root:robot 2 green collision at 179.7
+WARNING:root:robot 8 gray collision at 179.7
+WARNING:root:robot 8 gray collision resolved at 181.7
+WARNING:root:robot 2 green collision resolved at 182.0
+robot 0 starts task at 3.36
+robot 10 starts task at 3.85
+robot 1 starts task at 3.35
+robot 2 starts task at 3.59
+robot 5 starts task at 169.3
+robot 3 starts task at 115.3
+WARNING:root:robot 10 cyan collision at 308.1
+WARNING:root:robot 3 red collision at 308.2
+WARNING:root:robot 9 olive collision at 310.8
+WARNING:root:robot 9 olive collision resolved at 312.1
+WARNING:root:robot 9 olive collision at robot 2 starts task at 2.87
+robot 0 starts task at 2.81
+robot 1 starts task at 2.85
+robot 5 starts task at 167.73
+robot 3 starts task at 113.9
+robot 8 starts task at 179.05
+WARNING:root:robot 3 red collision at 413.2
+WARNING:root:robot 2 green collision at 413.4
+WARNING:root:robot 10 cyan collision at 415.2
+WARNING:root:robot 9 olive collision at 419.9
+WARNING:root:robot 9 olive collision resolved at 422.2
+WARNING:root:robot 9 olive collision at 422.4
+robot 1 starts task at 258.24
+robot 4 starts task at 3.08
+robot 2 starts task at 236.24
+robot 3 starts task at 298.72
+robot 7 starts task at 95.52
+robot 9 starts task at 3.28
+robot 6 starts task at 3.12
+robot 8 starts task at 394.17
+robot 0 starts task at 254.37
+robot 5 starts task at 291.31
+robot 11 starts task at 3.28
+robot 10 starts task at 222.86
+WARNING:root:13 tasks done for 12 robots in 435.77 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+robot 8 starts task at 3.29
+robot 7 starts task at 3.29
+robot 3 starts task at 3.13
+robot 4 starts task at 3.14
+robot 8 starts task at 60.17
+robot 5 starts task at 3.29
+robot 6 starts task at 3.3
+robot 11 starts task at 3.37
+robot 10 starts task at 3.33
+robot 9 starts task at 3.33
+robot 2 starrobot 8 starts task at 180.13
+WARNING:root:robot 2 green collision at 411.8
+WARNING:root:robot 3 red collision at 411.8
+WARNING:root:robot 9 olive collision at 414.4
+WARNING:root:robot 9 olive collision resolved at 415.7
+WARNING:root:robot 9 olive collision at 416.2
+WARNING:root:robot 9 olive collision resolved at 417.5
+WARNING:root:robot 9 olive collision at 417.7
+WARNING:root:robot 10 cyan collision at 417.9
+WARNING:root:robot 9 olive collision resolved at 419.2
+WARNING:root:robot 9 olive collision at 419.4
+WARNING:root:robot 9 olive collision resolved at 427.2
+WARNING:root:robot 9 olive collision at 427.4
+WARNING:root:robot 9 olive collision resolved at 429.2
+WARNING:root:robot 9 olive collision at 429.4
+WARNING:root:robot 9 olive collision resolved at 431.2
+WARNING:root:robot 9 olive collision at 431.6
+robot 1 starts task at 256.98
+robot 10 starts task at 222.88
+robot 9 starts task at 2.87
+robot 4 starts task at 2.73
+robot 11 starts task at 2.93
+robot 2 starts task at 237.72
+robot 5 starts task at 289.23
+robot 0 starts task at 253.14
+robot 6 starts task at 2.79
+robot 7 starts taskrobot 7 starts task at 3.44
+robot 3 starts task at 3.24
+robot 5 starts task at 3.58
+robot 8 starts task at 61.76
+robot 0 starts task at 2.91
+robot 10 starts task at 3.58
+robot 2 starts task at 3.05
+robot 1 starts task at 2.94
+robot 5 starts task at 169.18
+robot 3 starts task at 114.99
+WARNING:root:robot 10 cyan collision at 309.5
+WARNING:root:robot 10 cyan collision resolved at 311.4
+WARNING:root:robot 10 cyan collision at 317.0
+WARNING:root:robot 10 cyan collision resolved at 319.0
+robot 2 starts task at 243.35
+WARNING:root:robot 10 cyan collision at 324.3
+WARNING:root:robot 3 red collision at 324.4
+WARNING:root:robot 10 cyan collision resolved at 326.5
+WARNING:root:robot 3 red collision resolved at 326.7
+WARNING:root:robot 3 red collision at 333.5
+WARNING:root:robot 10 cyan collision at 333.5
+WARNING:root:robot 9 olive collision at 336.2
+WARNING:root:robot 9 olive collision resolved at 337.9
+WARNING:root:robot 9 olive collision at 338.4
+WARNING:root:robot 9 olive collision resolved at 340.0
+WARNING:root:robot 9 olive collision at 340.2
+       | 11955       |
+|    total_timesteps      | 40          |
+| train/                  |             |
+|    approx_kl            | 0.019825958 |
+|    clip_fraction        | 0.125       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.27       |
+|    explained_variance   | -4.05e-06   |
+|    learning_rate        | 0.0003      |
+|    loss                 | -0.26       |
+|    n_updates            | 40          |
+|    policy_gradient_loss | -0.0285     |
+|    std                  | 1           |
+|    value_loss           | 0.000698    |
+-----------------------------------------
+robot 8 starts task at 2.94
+robot 4 starts task at 2.84
+robot 7 starts task at 2.91
+robot 3 starts task at 2.84
+WARNING:root:robot 2 green collision at 122.3
+WARNING:root:robot 8 gray collision at 122.5
+WARNING:root:robot 2 green collision resolved at 123.6
+WARNING:root:robot 8 gray collision resolved at 123.8
+WARNING:root:robot 2 green collision at 123.8
+WARNING:root:robot 8 gray collision at 124.0
+WARNING:root:robot 2 green collision resolved at 125.8
+WARNING:root:robot 8 gray collision resolved at 125.9
+robot 5 starts task at 2.86
+robot 8 starts task at 59.69
+robot 6 starts task at 2.91
+robot 3 starts task at 112.25
+robot 11 starts task at 3.04
+robot 0 starts task at 2.72
+robot 10 starts task at 2.99
+robot 9 starts task at 2.97
+robot 2 starts task at 2.77
+robot 11 starts task at 215.37
+robot 0 starts task at 220.76
+robot 3 starts task at 205.61
+robot 10 starts task at 224.56
+robot 8 starts task at 181.46
+robot 7 starts task at 96.07
+robot 6 starts task at 184.81
+robot 4 starts task at 86.28
+robot 5 starts task at 166.24
+robot 9 starts task at 228.5
+robot 1 starts task at 2.74
+WARNING:root:13 tasks done for 12 robots in 238.71 seconds
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
+communication_handler: start listening and sending
