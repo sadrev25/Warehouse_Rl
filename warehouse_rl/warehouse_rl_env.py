@@ -51,15 +51,7 @@ class WarehouseRLEnv(gym.Env):
     BASELINE_MEAN_THROUGHPUT = 0.0552# tasks/sec
     BASELINE_MEAN_RUNTIME    = 434.8
 
-    HOTSPOT_POSITIONS = {
-        'n203': np.array([15.92, 7.70]),
-        'n217': np.array([14.07, 6.53]),
-        'n247': np.array([15.93, 6.55]),
-        'n112': np.array([22.30, 6.56]),
-        'n174': np.array([10.01, 9.87]),
-    }
-    PRIMARY_HOTSPOT = np.array([15.92, 7.70])
-    HOTSPOT_RADIUS  = 6.0
+
 
     def __init__(
         self,
@@ -207,27 +199,44 @@ class WarehouseRLEnv(gym.Env):
         elapsed    = float(time.time() - self._start_time) \
                      / self.BASELINE_MEAN_RUNTIME
 
-        # Hotspot features
-        hotspot_dists = [
-            float(np.linalg.norm(pos - hp))
-            for hp in self.HOTSPOT_POSITIONS.values()
-        ]
-        dist_to_nearest_hotspot = float(np.min(hotspot_dists))
-        n_robots_near_hotspot = float(sum(
-            1 for p in other_pos
-            if np.linalg.norm(p - self.PRIMARY_HOTSPOT) < self.HOTSPOT_RADIUS
-        ))
+        # Waypoint conflict awareness
+        time_to_next_waypoint = 0.0
+        min_conflict_gap = 6.0
+        try:
+            own_state = self._antagonist.state_handler.get_current_state()
+            if own_state.next_waypoints is not None \
+               and own_state.next_waypoints.size > 0:
+                time_to_next_waypoint = float(
+                    own_state.time_to_next_waypoints[0])
+                own_node = own_state.next_waypoints[0][0]
+                for r in self._swarm.swarm_robots:
+                    if r.id == self._antagonist.id:
+                        continue
+                    try:
+                        r_state = r.state_handler.get_current_state()
+                        if r_state.next_waypoints is not None \
+                           and r_state.next_waypoints.size > 0:
+                            for (node, _), t in zip(
+                                r_state.next_waypoints,
+                                r_state.time_to_next_waypoints
+                            ):
+                                if node == own_node:
+                                    gap = abs(float(t) - time_to_next_waypoint)
+                                    min_conflict_gap = min(min_conflict_gap, gap)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
 
         return np.array([
             pos[0], pos[1],
-            vel,
-            load,
+            vel, load,
             mean_d, min_d,
             tasks_done,
             float(self.max_tasks) - tasks_done,
             elapsed,
-            dist_to_nearest_hotspot,
-            n_robots_near_hotspot,
+            time_to_next_waypoint,   # obs[9]  time to next crossing
+            min_conflict_gap,        # obs[10] gap with nearest robot
         ], dtype=np.float32)
 
     def _compute_reward(self) -> float:
@@ -235,26 +244,4 @@ class WarehouseRLEnv(gym.Env):
         tasks_done        = len(self._swarm.finished_tasks_info)
         actual_throughput = tasks_done / elapsed
 
-        # Hotspot bonus
-        try:
-            antag_pos = self._antagonist.state_handler.get_current_position()
-            dist_to_primary = float(np.linalg.norm(antag_pos - self.PRIMARY_HOTSPOT))
-            if dist_to_primary < self.HOTSPOT_RADIUS:
-                other_pos = []
-                for r in self._swarm.swarm_robots:
-                    if r.id != self._antagonist.id and r.state_handler is not None:
-                        try:
-                            other_pos.append(r.state_handler.get_current_position())
-                        except Exception:
-                            pass
-                n_near = sum(
-                    1 for p in other_pos
-                    if np.linalg.norm(p - self.PRIMARY_HOTSPOT) < self.HOTSPOT_RADIUS
-                )
-                hotspot_bonus = 0.01 * n_near
-            else:
-                hotspot_bonus = 0.0
-        except Exception:
-            hotspot_bonus = 0.0
-
-        return float(self.BASELINE_MEAN_THROUGHPUT - actual_throughput + hotspot_bonus)
+        return float(self.BASELINE_MEAN_THROUGHPUT - actual_throughput)

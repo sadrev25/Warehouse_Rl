@@ -623,18 +623,7 @@ class AntagonisticWarehouseRobot(WarehouseRobot):
         real_state = super().get_last_recorded_state()
         if self._fake_priority is None and self._fake_has_load is None:
             return real_state
-        hotspots = [
-            np.array([15.92, 7.70]),
-            np.array([14.07, 6.53]),
-            np.array([15.93, 6.55]),
-            np.array([22.30, 6.56]),
-            np.array([10.01, 9.87]),
-        ]
-        pos = real_state.position
-        if pos is None:
-            return real_state
-        dist_to_hotspot = min(np.linalg.norm(pos - h) for h in hotspots)
-        if dist_to_hotspot > 6.0:
+        if real_state.position is None:
             return real_state
         fake_state = RobotState()
         fake_state.set_time_stamp(time_stamp=real_state.time_stamp)
